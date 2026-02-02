@@ -26,7 +26,10 @@
 
 @layer base {
   body {
-    @apply font-sans text-body text-neutral-0 bg-neutral-900 flex flex-col justify-center items-center min-h-screen;
+    @apply font-sans text-neutral-200 bg-neutral-900 flex flex-col justify-center items-center min-h-screen;
+  }
+  #root {
+    @apply w-full
   }
 }
 
@@ -145,8 +148,5 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }
