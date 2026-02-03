@@ -1,4 +1,4 @@
-export interface searchData {
+export interface GeoResult {
   id: number;
   name: string;
   latitude: number;

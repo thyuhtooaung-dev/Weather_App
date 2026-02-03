@@ -44,3 +44,14 @@ export const formatTime = (isoString: string) => {
     hour12: true,
   });
 };
+
+export const formatTodayTime = (isoString: string) => {
+  return new Date(isoString).toLocaleTimeString([], {
+    weekday: "long",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "numeric",
+    hour12: true,
+  });
+}

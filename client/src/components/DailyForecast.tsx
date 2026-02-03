@@ -1,14 +1,16 @@
 import { dailyForecasts } from "@/utils/weatherZipper.ts";
 import { getWeatherConfig } from "@/utils/weatherUtils.ts";
 import type { WeatherData } from "@/types/weather.ts";
+import { useFormatWeather } from "@/hooks/useFormatWeather.ts";
 
 export default function DailyForecast({weather}: {weather: WeatherData}) {
+  const {formatTemp} = useFormatWeather()
   return (
     <div>
       <header className={"text-neutral-0 my-4 text-xl font-semibold"}>
         Daily forecast
       </header>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-4">
         {dailyForecasts(weather).map((day) => (
           <div
             key={day.time}
@@ -25,8 +27,8 @@ export default function DailyForecast({weather}: {weather: WeatherData}) {
               className="size-20 mx-auto"
             />
             <div className="flex justify-between items-center">
-              <p className="font-bold">{day.maxTemp}° </p>
-              <span className="text-neutral-200 text-sm">{day.minTemp}°</span>
+              <p className="font-bold">{formatTemp(day.maxTemp)}</p>
+              <span className="text-neutral-200 text-sm">{formatTemp(day.minTemp)}</span>
             </div>
           </div>
         ))}
