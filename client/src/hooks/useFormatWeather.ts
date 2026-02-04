@@ -24,5 +24,22 @@ export const useFormatWeather = () => {
     return `${precipMm} mm`;
   };
 
-  return { formatTemp, formatSpeed, formatPrecipitation };
+  const formatPressure = (hPa: number) => {
+    return `${Math.round(hPa)} hPa`;
+  };
+
+  const formatVisibility = (meters: number) => {
+    if (units.mph) {
+      const miles = meters / 1609.34;
+      return `${miles.toFixed(1)} mi`;
+    }
+    const km = meters / 1000;
+    return `${km.toFixed(1)} km`;
+  };
+
+  const formatUv = (index: number) => {
+    return Math.round(index).toString();
+  };
+
+  return { formatTemp, formatSpeed, formatPrecipitation, formatVisibility, formatPressure, formatUv };
 };

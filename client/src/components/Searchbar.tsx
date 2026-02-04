@@ -11,6 +11,7 @@ export default function Searchbar({onLocationSelect} : {onLocationSelect: (lat: 
   const [results, setResults] = useState<GeoResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -21,14 +22,14 @@ export default function Searchbar({onLocationSelect} : {onLocationSelect: (lat: 
     if (query.length > 2) {
       setIsLoading(true);
       setIsOpen(false);
-
+      setHasSearched(true)
       try {
         const data = await searchCities(query);
         setResults(data);
         setIsOpen(true);
       } catch (error) {
-        console.error("Search failed", error);
         setResults([]);
+        setIsOpen(true)
       } finally {
         setIsLoading(false);
       }
@@ -97,6 +98,21 @@ export default function Searchbar({onLocationSelect} : {onLocationSelect: (lat: 
       >
         {isLoading ? "..." : "Search"}
       </Button>
+      {!isLoading &&
+        isOpen &&
+        results.length === 0 &&
+        hasSearched &&
+        query.length > 2 && (
+          <div className="absolute top-full left-0 right-0 mt-2 bg-neutral-800 rounded-md shadow-lg border border-neutral-700 p-6 flex flex-col items-center gap-2 text-center">
+            <span className="text-neutral-200 font-bold">
+              No locations found
+            </span>
+            <p className="text-neutral-400 text-sm">
+              We couldn't find "{query}". <br /> Try searching for a larger city
+              nearby.
+            </p>
+          </div>
+        )}
     </div>
   );
 }

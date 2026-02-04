@@ -23,7 +23,15 @@ const detailCardStyle =
   "bg-neutral-800 py-3 px-5 flex flex-col gap-6 rounded-lg";
 
 export const TodayDetailSkeleton = () => {
-  const details = ["Feels Like", "Humidity", "Wind", "Precipitation"];
+  const details = [
+    "Feels Like",
+    "Humidity",
+    "Wind",
+    "Precipitation",
+    "Pressure",
+    "Visibility",
+    "Max UV Index",
+  ];
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -79,7 +87,7 @@ export const HourlyForecastSkeleton = () => {
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 pb-4">
-        {[...Array(7)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <div
             key={i}
             className="flex justify-between items-center bg-neutral-700 p-3 rounded-md"

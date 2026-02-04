@@ -14,6 +14,8 @@ export interface WeatherData {
     apparent_temperature: string;
     wind_speed_10m: string;
     precipitation: string;
+    pressure_msl: number;
+    visibility: number
   };
   current: {
     time: string;
@@ -24,6 +26,8 @@ export interface WeatherData {
     wind_speed_10m: number;
     precipitation: number;
     weather_code: number;
+    pressure_msl: number;
+    visibility: number;
   };
   hourly_units: {
     time: string;
@@ -40,11 +44,13 @@ export interface WeatherData {
     temperature_2m_max: string;
     temperature_2m_min: string;
     weather_code: string;
+    uv_index_max: string;
   };
   daily: {
     time: string[];
     temperature_2m_max: number[];
     temperature_2m_min: number[];
     weather_code: number[];
+    uv_index_max: number[];
   };
 }

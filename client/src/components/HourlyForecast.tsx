@@ -14,12 +14,14 @@ import { useFormatWeather } from "@/hooks/useFormatWeather.ts";
 
 export default function HourlyForecast({ weather }: { weather: WeatherData }) {
   const [selectedDay, setSelectedDay] = useState(weather.daily.time[0]);
-  const {formatTemp} = useFormatWeather();
+  const { formatTemp } = useFormatWeather();
   const currentApiDate = weather.current.time.split("T")[0];
+
   const currentDayHours = allHours(weather).filter((hour) => {
     const isSelectedDay = hour.time.startsWith(selectedDay);
     if (!isSelectedDay) return false;
 
+    // Logic: If it's today, show only future hours. Else (tomorrow+), show all hours (starting 12AM)
     if (selectedDay === currentApiDate) {
       return hour.time > weather.current.time;
     }
@@ -28,8 +30,10 @@ export default function HourlyForecast({ weather }: { weather: WeatherData }) {
   });
 
   return (
-    <div className={"bg-neutral-800 p-4 rounded-xl"}>
-      <header className="flex items-center justify-between mb-4">
+    <div
+      className={"bg-neutral-800 p-4 rounded-xl h-full flex flex-col max-h-190"}
+    >
+      <header className="flex items-center justify-between mb-4 shrink-0">
         <h2 className={"text-xl font-semibold text-neutral-0"}>
           Hourly forecast
         </h2>
@@ -73,29 +77,33 @@ export default function HourlyForecast({ weather }: { weather: WeatherData }) {
         </DropdownMenu>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 overflow-x-auto gap-4 pb-4">
-        {currentDayHours
-          .map((hour) => (
-            <div
-              key={hour.time}
-              className="min-w-20 flex justify-between items-center bg-neutral-700 p-3 rounded-md"
-            >
-              <div className={"flex gap-4 items-center"}>
-                <img
-                  src={`/images/${getWeatherConfig(hour.code).icon}.webp`}
-                  alt={getWeatherConfig(hour.code).label}
-                  className="size-10"
-                />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 pb-4 overflow-y-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
+        {currentDayHours.map((hour) => (
+          <div
+            key={hour.time}
+            className="min-w-20 flex justify-between items-center bg-neutral-700 p-3 rounded-md"
+          >
+            <div className={"flex gap-4 items-center"}>
+              <img
+                src={`/images/${getWeatherConfig(hour.code).icon}.webp`}
+                alt={getWeatherConfig(hour.code).label}
+                className="size-10"
+              />
 
-                <span className="text-lg text-neutral-0 font-semibold">
-                  {formatTime(hour.time)}
-                </span>
-              </div>
-
-              <span className="font-bold">{formatTemp(hour.temp)}</span>
+              <span className="text-lg text-neutral-0 font-semibold">
+                {formatTime(hour.time)}
+              </span>
             </div>
-          ))
-          .slice(0, 7)}
+
+            <span className="font-bold">{formatTemp(hour.temp)}</span>
+          </div>
+        ))}
+        {currentDayHours.length < 8 && (
+          <div className="md:col-span-2 lg:col-span-1 py-10 flex flex-col items-center justify-center opacity-40">
+            <span className="w-16 h-px bg-neutral-400 mb-2"></span>
+            <p className="text-neutral-200 text-sm italic">End of the day</p>
+          </div>
+        )}
       </div>
     </div>
   );

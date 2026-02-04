@@ -6,7 +6,7 @@ const detailCardStyle =
 
 
 export default function TodayDetailCard({weather}: { weather: WeatherData }) {
-  const { formatTemp, formatSpeed, formatPrecipitation } = useFormatWeather();
+  const { formatTemp, formatSpeed, formatPrecipitation, formatUv, formatPressure, formatVisibility } = useFormatWeather();
   return (
     <div className={"grid grid-cols-2 lg:grid-cols-4 gap-4"}>
       <div className={`${detailCardStyle}`}>
@@ -31,6 +31,24 @@ export default function TodayDetailCard({weather}: { weather: WeatherData }) {
         <p>Precipitation</p>
         <span className={"text-neutral-0 text-2xl"}>
           {formatPrecipitation(weather.current.precipitation)}
+        </span>
+      </div>
+      <div className={`${detailCardStyle}`}>
+        <p>Pressure</p>
+        <span className={"text-neutral-0 text-2xl"}>
+          {formatPressure(weather.current.pressure_msl)}
+        </span>
+      </div>
+      <div className={`${detailCardStyle}`}>
+        <p>Visibility</p>
+        <span className={"text-neutral-0 text-2xl"}>
+          {formatVisibility(weather.current.visibility)}
+        </span>
+      </div>
+      <div className={`${detailCardStyle}`}>
+        <p>Max UV Index</p>
+        <span className={"text-neutral-0 text-2xl"}>
+          {formatUv(weather.daily.uv_index_max[0])}
         </span>
       </div>
     </div>
