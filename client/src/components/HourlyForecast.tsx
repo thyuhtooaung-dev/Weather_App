@@ -9,12 +9,12 @@ import {
 import { Button } from "@/components/ui/button.tsx";
 import { allHours } from "@/utils/weatherZipper.ts";
 import type { WeatherData } from "@/types/weather.ts";
-import { formatTime, getWeatherConfig } from "@/utils/weatherUtils.ts";
+import { getWeatherConfig } from "@/utils/weatherUtils.ts";
 import { useFormatWeather } from "@/hooks/useFormatWeather.ts";
 
 export default function HourlyForecast({ weather }: { weather: WeatherData }) {
   const [selectedDay, setSelectedDay] = useState(weather.daily.time[0]);
-  const { formatTemp } = useFormatWeather();
+  const { formatTemp,formatTime } = useFormatWeather();
   const currentApiDate = weather.current.time.split("T")[0];
 
   const currentDayHours = allHours(weather).filter((hour) => {

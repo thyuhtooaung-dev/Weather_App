@@ -36,22 +36,3 @@ export const getWeatherConfig = (code: number) => {
       return { label: "Unknown", icon: "icon-loading" };
   }
 };
-
-export const formatTime = (isoString: string) => {
-  return new Date(isoString).toLocaleTimeString([], {
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-  });
-};
-
-export const formatTodayTime = (isoString: string) => {
-  return new Date(isoString).toLocaleTimeString([], {
-    weekday: "long",
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    hour: "numeric",
-    hour12: true,
-  });
-}

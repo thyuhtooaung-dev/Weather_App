@@ -41,5 +41,32 @@ export const useFormatWeather = () => {
     return Math.round(index).toString();
   };
 
-  return { formatTemp, formatSpeed, formatPrecipitation, formatVisibility, formatPressure, formatUv };
+  const formatSunTime = (isoString: string) => {
+    return new Date(isoString).toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
+
+   const formatTime = (isoString: string) => {
+    return new Date(isoString).toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
+
+  const formatTodayTime = (isoString: string) => {
+    return new Date(isoString).toLocaleTimeString([], {
+      weekday: "long",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "numeric",
+      hour12: true,
+    });
+  };
+
+  return { formatTemp, formatSpeed, formatPrecipitation, formatVisibility, formatPressure, formatUv, formatSunTime, formatTime, formatTodayTime };
 };

@@ -1,12 +1,12 @@
 import type { WeatherData } from "@/types/weather.ts";
-import { formatTodayTime, getWeatherConfig } from "@/utils/weatherUtils.ts";
+import { getWeatherConfig } from "@/utils/weatherUtils.ts";
 import { useFormatWeather } from "@/hooks/useFormatWeather.ts";
 
 export default function TodayCard({weather, city, country}: {weather: WeatherData, city: string, country: string}) {
   const currentConfig = getWeatherConfig(weather.current.weather_code);
   const currentHour = new Date(weather.current.time).getHours();
   const isNight = currentHour >= 18 || currentHour < 6;
-  const { formatTemp } = useFormatWeather();
+  const { formatTemp, formatTodayTime } = useFormatWeather();
   const bgSmall = isNight
     ? "bg-[url('/images/bg-today-small.svg')]"
     : "bg-[url('/images/bg-today-small-day.svg')]";

@@ -1,3 +1,6 @@
+import * as React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,11 +18,34 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/context/AuthContext.tsx";
+import { authService } from "@/services/auth.api.ts";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const { loginWithGoogle, loginWithGithub, setTokenManual } = useAuth();
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const data = await authService.login({
+        email,
+        password,
+      });
+      setTokenManual(data.access_token);
+      navigate("/");
+    } catch (err) {
+      setError("Invalid email or password");
+    }
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className={"bg-neutral-800 "}>
@@ -30,7 +56,7 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleLogin}>
             <FieldGroup>
               <Field>
                 <Button
@@ -39,6 +65,7 @@ export function LoginForm({
                   className={
                     "bg-neutral-700 text-neutral-200 border-none cursor-pointer hover:bg-neutral-300"
                   }
+                  onClick={loginWithGithub}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path
@@ -54,6 +81,7 @@ export function LoginForm({
                   className={
                     "bg-neutral-700 text-neutral-200 border-none cursor-pointer hover:bg-neutral-300"
                   }
+                  onClick={loginWithGoogle}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path
@@ -75,6 +103,8 @@ export function LoginForm({
                   id="email"
                   type="email"
                   placeholder="m@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   className={"py-5 border-none bg-neutral-700 text-neutral-200"}
                 />
@@ -84,24 +114,35 @@ export function LoginForm({
                   <FieldLabel htmlFor="password" className={"text-neutral-200"}>
                     Password
                   </FieldLabel>
-                  <a
-                    href="#"
+                  {/*TODO: Forgot your password logic*/}
+                  <Link
+                    to="#"
                     className="ml-auto text-sm underline-offset-4 hover:underline text-neutral-200"
                   >
                     Forgot your password?
-                  </a>
+                  </Link>
                 </div>
                 <Input
                   id="password"
                   type="password"
                   required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className={"py-5 border-none bg-neutral-700 text-neutral-200"}
                 />
               </Field>
               <Field>
-                <Button type="submit" className={"text-neutral-200 bg-blue-700 py-5 cursor-pointer font-display text-base"}>Login</Button>
+                {error && <p className="text-red-500 text-sm">{error}</p>}
+                <Button
+                  type="submit"
+                  className={
+                    "text-neutral-200 bg-blue-700 py-5 cursor-pointer font-display text-base"
+                  }
+                >
+                  Login
+                </Button>
                 <FieldDescription className="text-center text-neutral-200">
-                  Don&apos;t have an account? <a href="/signup">Sign up</a>
+                  Don&apos;t have an account? <Link to="/signup">Sign up</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>

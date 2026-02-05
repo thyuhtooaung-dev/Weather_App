@@ -5,17 +5,20 @@ import "./index.css";
 import App from "./App.tsx";
 import { WeatherUnitProvider } from "@/context/WeatherUnitContext.tsx";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { AuthProvider } from "@/context/AuthContext.tsx";
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <WeatherUnitProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </WeatherUnitProvider>
-    </QueryClientProvider>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <WeatherUnitProvider>
+            <App />
+          </WeatherUnitProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </BrowserRouter>
   </StrictMode>,
 );

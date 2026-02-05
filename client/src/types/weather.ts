@@ -45,6 +45,8 @@ export interface WeatherData {
     temperature_2m_min: string;
     weather_code: string;
     uv_index_max: string;
+    sunrise: string,
+    sunset: string,
   };
   daily: {
     time: string[];
@@ -52,5 +54,7 @@ export interface WeatherData {
     temperature_2m_min: number[];
     weather_code: number[];
     uv_index_max: number[];
+    sunrise: string[],
+    sunset: string[],
   };
 }

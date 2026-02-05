@@ -43,6 +43,23 @@ export const TodayDetailSkeleton = () => {
           </span>
         </div>
       ))}
+
+      <div className={`${detailCardStyle} justify-between`}>
+        <div className="flex flex-col items-center justify-end w-full gap-2">
+          <div className="w-32 h-8 border-t-2 border-dashed border-neutral-700 rounded-t-full mx-auto opacity-50" />
+
+          <div className="flex justify-between w-full mt-1">
+            <div className="flex flex-col gap-1">
+              <Skeleton className="w-6 h-2 bg-neutral-700" />
+              <Skeleton className="w-10 h-3 bg-neutral-600" />
+            </div>
+            <div className="flex flex-col items-end gap-1">
+              <Skeleton className="w-6 h-2 bg-neutral-700" />
+              <Skeleton className="w-10 h-3 bg-neutral-600" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

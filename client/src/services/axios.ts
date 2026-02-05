@@ -1,13 +1,20 @@
 import axios from "axios";
 
-const weatherApi = axios.create({
+const weatherClient = axios.create({
   baseURL: `https://api.open-meteo.com/v1`,
   timeout: 5000,
 });
 
-const geoApi = axios.create({
+const geoClient = axios.create({
   baseURL: `https://geocoding-api.open-meteo.com/v1`,
   timeout: 5000,
 });
 
-export { weatherApi , geoApi };
+const authClient = axios.create({
+  baseURL: "http://localhost:3000/auth",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+export { weatherClient , geoClient, authClient };
