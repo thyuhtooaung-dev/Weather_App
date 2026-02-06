@@ -46,11 +46,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [token]);
 
   const loginWithGoogle = () => {
-    window.location.href = "http://localhost:3000/auth/google";
+    window.location.href =
+      "https://weather-app-backend-bzxa.onrender.com/auth/google";
   };
 
   const loginWithGithub = () => {
-    window.location.href = "http://localhost:3000/auth/github";
+    window.location.href =
+      "https://weather-app-backend-bzxa.onrender.com/auth/github";
   };
 
   const logout = () => {
