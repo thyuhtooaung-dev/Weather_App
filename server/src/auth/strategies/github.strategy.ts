@@ -10,7 +10,8 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
     super({
       clientID: configService.getOrThrow<string>('GITHUB_CLIENT_ID'),
       clientSecret: configService.getOrThrow<string>('GITHUB_CLIENT_SECRET'),
-      callbackURL: 'http://localhost:3000/auth/github/redirect',
+      callbackURL:
+        'https://weather-app-backend-bzxa.onrender.com/auth/github/redirect',
       scope: ['user:email'],
     });
   }
