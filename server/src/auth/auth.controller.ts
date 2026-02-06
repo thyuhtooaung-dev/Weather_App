@@ -1,12 +1,24 @@
-import { Controller, Get, Req, UseGuards, Res, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Req,
+  UseGuards,
+  Res,
+  Post,
+  Body,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import express from 'express';
 import { AuthService } from './auth.service';
 import * as types from './types';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly configService: ConfigService,
+  ) {}
   @Get('google')
   @UseGuards(AuthGuard('google'))
   googleAuth() {}
@@ -18,7 +30,9 @@ export class AuthController {
     @Res() res: express.Response,
   ) {
     const result = await this.authService.validateOAuthLogin(req.user);
-    res.redirect(`http://localhost:5173/?token=${result.access_token}`);
+    const clientUrl = this.configService.getOrThrow<string>('CLIENT_URL');
+
+    res.redirect(`${clientUrl}/weather?token=${result.access_token}`);
   }
 
   @Get('github')
@@ -32,7 +46,8 @@ export class AuthController {
     @Res() res: express.Response,
   ) {
     const result = await this.authService.validateOAuthLogin(req.user);
-    res.redirect(`http://localhost:5173/?token=${result.access_token}`);
+    const clientUrl = this.configService.getOrThrow<string>('CLIENT_URL');
+    res.redirect(`${clientUrl}/weather?token=${result.access_token}`);
   }
 
   @Post('signup')

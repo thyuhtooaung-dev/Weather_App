@@ -4,7 +4,10 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'http://localhost:5173',
+    origin: [
+      'http://localhost:5173',
+      'https://weather-app-pi-eosin-28.vercel.app',
+    ],
     methods: 'GET,HEAD,PUT,POST,DELETE,OPTIONS',
     credentials: true,
   });

@@ -6,6 +6,7 @@ import App from "./App.tsx";
 import { WeatherUnitProvider } from "@/context/WeatherUnitContext.tsx";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { AuthProvider } from "@/context/AuthContext.tsx";
+import { FavoritesProvider } from "@/context/FavoritesContext.tsx";
 
 const queryClient = new QueryClient();
 
@@ -15,7 +16,9 @@ createRoot(document.getElementById("root")!).render(
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <WeatherUnitProvider>
-            <App />
+            <FavoritesProvider>
+              <App />
+            </FavoritesProvider>
           </WeatherUnitProvider>
         </AuthProvider>
       </QueryClientProvider>

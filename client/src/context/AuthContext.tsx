@@ -1,10 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
 import * as React from "react";
+import { apiClient } from "@/services/axios.ts";
 
 interface User {
-  userId: string;
+  id: string;
   email: string;
+  firstName: string;
+  avatar: string;
 }
 
 interface AuthContextType {
@@ -27,19 +29,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      axios
-        .get("http://localhost:3000/users/profile")
+      apiClient
+        .get("/users/profile")
         .then((res) => {
           setUser(res.data);
           localStorage.setItem("token", token);
         })
-        .catch(() => {
+        .catch((err) => {
+          console.error("Profile fetch error:", err);
           logout();
         });
     } else {
-      delete axios.defaults.headers.common["Authorization"];
       localStorage.removeItem("token");
+      setUser(null);
     }
   }, [token]);
 
@@ -59,8 +61,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const setTokenManual = (newToken: string) => {
-    setToken(newToken);
     localStorage.setItem("token", newToken);
+    setToken(newToken);
   };
 
   return (

@@ -63,7 +63,7 @@ export default function Home() {
   if (isLoading) {
     return (
       <div className="w-full p-4 flex flex-col gap-6 justify-center items-center xl:p-8 lg:px-10 lg:py-6 xl:px-18">
-        <Navbar />
+        <Navbar onSelectCity={handleLocationSelect} />
         <header className="w-full">
           <h1 className="text-5xl lg:text-6xl text-center font-extrabold font-display my-6 px-4 text-neutral-0">
             How's the sky looking today?
@@ -91,7 +91,7 @@ export default function Home() {
   if (isError || !weather) {
     return (
       <div className="w-full p-4 flex flex-col gap-6 justify-center items-center xl:p-8 lg:px-10 lg:py-6 xl:px-18">
-        <Navbar />
+        <Navbar onSelectCity={handleLocationSelect} />
         <ApiErrorState refetch={refetch} />
       </div>
     );
@@ -103,7 +103,7 @@ export default function Home() {
         "w-full p-4 flex flex-col gap-6 justify-center items-center xl:p-8 lg:px-10 lg:py-6 xl:px-18"
       }
     >
-      <Navbar />
+      <Navbar onSelectCity={handleLocationSelect} />
       <header className="w-full">
         <h1
           className={
@@ -123,6 +123,8 @@ export default function Home() {
               weather={weather}
               city={location.name}
               country={location.country}
+              lat={location.lat}
+              lon={location.lon}
             />
             <TodayDetailCard weather={weather} />
           </div>

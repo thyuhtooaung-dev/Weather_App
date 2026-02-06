@@ -40,7 +40,7 @@ export function LoginForm({
         password,
       });
       setTokenManual(data.access_token);
-      navigate("/");
+      navigate("/weather");
     } catch (err) {
       setError("Invalid email or password");
     }
@@ -52,7 +52,7 @@ export function LoginForm({
         <CardHeader className="text-center">
           <CardTitle className="text-xl text-neutral-0">Welcome back</CardTitle>
           <CardDescription className={"text-neutral-200"}>
-            Login with your Apple or Google account
+            Login with your Github or Google account
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -142,7 +142,22 @@ export function LoginForm({
                   Login
                 </Button>
                 <FieldDescription className="text-center text-neutral-200">
-                  Don&apos;t have an account? <Link to="/signup">Sign up</Link>
+                  Don&apos;t have an account?{" "}
+                  <Link
+                    to="/signup"
+                    className={
+                      "text-neutral-400 hover:text-white text-sm font-medium transition-colors"
+                    }
+                  >
+                    Sign up
+                  </Link>{" "}
+                  Or{" "}
+                  <Link
+                    to="/weather"
+                    className="text-neutral-400 hover:text-white text-sm font-medium transition-colors"
+                  >
+                    Continue as Guest
+                  </Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>

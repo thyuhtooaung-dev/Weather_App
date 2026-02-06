@@ -20,8 +20,6 @@ export default function HourlyForecast({ weather }: { weather: WeatherData }) {
   const currentDayHours = allHours(weather).filter((hour) => {
     const isSelectedDay = hour.time.startsWith(selectedDay);
     if (!isSelectedDay) return false;
-
-    // Logic: If it's today, show only future hours. Else (tomorrow+), show all hours (starting 12AM)
     if (selectedDay === currentApiDate) {
       return hour.time > weather.current.time;
     }
@@ -31,7 +29,7 @@ export default function HourlyForecast({ weather }: { weather: WeatherData }) {
 
   return (
     <div
-      className={"bg-neutral-800 p-4 rounded-xl h-full flex flex-col max-h-190"}
+      className={"bg-neutral-800 p-4 rounded-xl h-full flex flex-col max-h-200"}
     >
       <header className="flex items-center justify-between mb-4 shrink-0">
         <h2 className={"text-xl font-semibold text-neutral-0"}>

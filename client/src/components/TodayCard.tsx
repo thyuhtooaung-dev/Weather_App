@@ -1,12 +1,32 @@
 import type { WeatherData } from "@/types/weather.ts";
 import { getWeatherConfig } from "@/utils/weatherUtils.ts";
 import { useFormatWeather } from "@/hooks/useFormatWeather.ts";
+import LikeButton from "@/components/LikeButton.tsx";
+import { useAuth } from "@/context/AuthContext.tsx";
+import { useNavigate } from "react-router-dom";
+import { useFavorites } from "@/context/FavoritesContext.tsx";
 
-export default function TodayCard({weather, city, country}: {weather: WeatherData, city: string, country: string}) {
+export default function TodayCard({
+  weather,
+  city,
+  country,
+  lat,
+  lon
+}: {
+  weather: WeatherData;
+  city: string;
+  country: string;
+  lat: number;
+  lon: number;
+}) {
   const currentConfig = getWeatherConfig(weather.current.weather_code);
   const currentHour = new Date(weather.current.time).getHours();
-  const isNight = currentHour >= 18 || currentHour < 6;
   const { formatTemp, formatTodayTime } = useFormatWeather();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { isFavorite, addFavorite, removeFavorite, favorites } = useFavorites();
+  const isLiked = isFavorite(lat, lon);
+  const isNight = currentHour >= 18 || currentHour < 6;
   const bgSmall = isNight
     ? "bg-[url('/images/bg-today-small.svg')]"
     : "bg-[url('/images/bg-today-small-day.svg')]";
@@ -15,6 +35,18 @@ export default function TodayCard({weather, city, country}: {weather: WeatherDat
     ? "md:bg-[url('/images/bg-today-large.svg')]"
     : "md:bg-[url('/images/bg-today-large-day.svg')]";
 
+  const handleHeartClick = async (likedState: boolean) => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    if (likedState) {
+      await addFavorite({ name: city, country, lat, lon });
+    } else {
+      const fav = favorites.find((f) => f.lat === lat && f.lon === lon);
+      if (fav) await removeFavorite(fav.id);
+    }
+  };
 
   return (
     <div
@@ -28,9 +60,16 @@ export default function TodayCard({weather, city, country}: {weather: WeatherDat
         <h2 className="text-3xl font-semibold">
           {city}, {country}
         </h2>
-        <p className="text-base opacity-80">
-          {formatTodayTime(weather.current.time)}
-        </p>
+        <div className={"flex flex-col items-center gap-3 lg:flex-row"}>
+          <p className="text-base opacity-80">
+            {formatTodayTime(weather.current.time)}
+          </p>
+          <LikeButton
+            className="w-18 h-18"
+            onToggle={handleHeartClick}
+            initialLiked={isLiked}
+          />
+        </div>
       </div>
 
       <div className="flex justify-between md:mt-auto lg:justify-end lg:gap-4 w-full lg:w-fit items-center">

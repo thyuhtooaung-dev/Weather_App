@@ -1,4 +1,4 @@
-import { authClient } from "@/services/axios.ts";
+import { apiClient } from "@/services/axios.ts";
 
 export interface SignupDto {
   firstName: string;
@@ -22,12 +22,12 @@ export interface AuthResponse {
 
 export const authService = {
   signup: async (data: SignupDto): Promise<AuthResponse> => {
-    const response = await authClient.post<AuthResponse>("/signup", data);
+    const response = await apiClient.post<AuthResponse>("/auth/signup", data);
     return response.data;
   },
 
   login: async (data: LoginDto): Promise<AuthResponse> => {
-    const response = await authClient.post<AuthResponse>("/login", data);
+    const response = await apiClient.post<AuthResponse>("/auth/login", data);
     return response.data;
   },
 };
