@@ -14,6 +14,7 @@ const geoClient = axios.create({
 
 const apiClient = axios.create({
   baseURL: API_URL,
+  withCredentials: true,
 });
 apiClient.interceptors.request.use(
   (config) => {
