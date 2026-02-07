@@ -17,6 +17,7 @@ interface AuthContextType {
   loginWithGithub: () => void;
   logout: () => void;
   setTokenManual: (token: string) => void;
+  refreshSession: () => Promise<boolean>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -28,22 +29,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
-    if (token) {
-      apiClient
-        .get("/users/profile")
-        .then((res) => {
-          setUser(res.data);
+    const fetchSession = async () => {
+      try {
+        const res = await apiClient.get("/users/profile");
+        setUser(res.data);
+        if (token) {
           localStorage.setItem("token", token);
-        })
-        .catch((err) => {
-          console.error("Profile fetch error:", err);
-          logout();
-        });
+        }
+      } catch (err) {
+        console.error("Profile fetch error:", err);
+        if (token) {
+          localStorage.removeItem("token");
+          setToken(null);
+        }
+        setUser(null);
+      }
+    };
+
+    if (token) {
+      void fetchSession();
     } else {
-      localStorage.removeItem("token");
-      setUser(null);
+      void fetchSession();
     }
   }, [token]);
+
+  const refreshSession = async () => {
+    try {
+      const res = await apiClient.get("/users/profile");
+      setUser(res.data);
+      return true;
+    } catch {
+      setUser(null);
+      return false;
+    }
+  };
 
   const loginWithGoogle = () => {
     window.location.href =
@@ -59,6 +78,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
     setToken(null);
     localStorage.removeItem("token");
+    void apiClient.post("/auth/logout");
     window.location.href = "/login";
   };
 
@@ -77,6 +97,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         loginWithGithub,
         logout,
         setTokenManual,
+        refreshSession,
       }}
     >
       {children}

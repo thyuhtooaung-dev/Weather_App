@@ -32,7 +32,14 @@ export class AuthController {
     const result = await this.authService.validateOAuthLogin(req.user);
     const clientUrl = this.configService.getOrThrow<string>('CLIENT_URL');
 
-    res.redirect(`${clientUrl}/weather?token=${result.access_token}`);
+    res.cookie('access_token', result.access_token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.redirect(`${clientUrl}/weather`);
   }
 
   @Get('github')
@@ -47,7 +54,26 @@ export class AuthController {
   ) {
     const result = await this.authService.validateOAuthLogin(req.user);
     const clientUrl = this.configService.getOrThrow<string>('CLIENT_URL');
-    res.redirect(`${clientUrl}/weather?token=${result.access_token}`);
+
+    res.cookie('access_token', result.access_token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.redirect(`${clientUrl}/weather`);
+  }
+
+  @Post('logout')
+  logout(@Res() res: express.Response) {
+    res.clearCookie('access_token', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+    });
+
+    return res.status(200).json({ success: true });
   }
 
   @Post('signup')
