@@ -98,6 +98,10 @@ export class AuthController {
       throw new UnauthorizedException('Invalid OAuth state');
     }
 
+    if (!req.user) {
+      throw new UnauthorizedException('OAuth authentication failed');
+    }
+
     const result = await this.authService.validateOAuthLogin(req.user, {
       ipAddress: req.ip,
       userAgent: req.get('user-agent') ?? undefined,
@@ -144,6 +148,10 @@ export class AuthController {
 
     if (!callbackState || callbackState !== cookies.oauth_state) {
       throw new UnauthorizedException('Invalid OAuth state');
+    }
+
+    if (!req.user) {
+      throw new UnauthorizedException('OAuth authentication failed');
     }
 
     const result = await this.authService.validateOAuthLogin(req.user, {

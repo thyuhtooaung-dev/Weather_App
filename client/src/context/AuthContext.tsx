@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 import * as React from "react";
 import { apiClient } from "@/services/axios.ts";
 
@@ -23,18 +23,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
-  useEffect(() => {
-    const fetchSession = async () => {
-      try {
-        const res = await apiClient.get("/users/profile");
-        setUser(res.data);
-      } catch {
-        setUser(null);
-      }
-    };
-
-    void fetchSession();
-  }, []);
 
   const refreshSession = useCallback(async () => {
     try {
