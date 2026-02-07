@@ -11,12 +11,10 @@ interface User {
 
 interface AuthContextType {
   user: User | null;
-  token: string | null;
   isAuthenticated: boolean;
   loginWithGoogle: () => void;
   loginWithGithub: () => void;
   logout: () => void;
-  setTokenManual: (token: string) => void;
   refreshSession: () => Promise<boolean>;
 }
 
@@ -24,34 +22,19 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(
-    localStorage.getItem("token"),
-  );
 
   useEffect(() => {
     const fetchSession = async () => {
       try {
         const res = await apiClient.get("/users/profile");
         setUser(res.data);
-        if (token) {
-          localStorage.setItem("token", token);
-        }
-      } catch (err) {
-        console.error("Profile fetch error:", err);
-        if (token) {
-          localStorage.removeItem("token");
-          setToken(null);
-        }
+      } catch {
         setUser(null);
       }
     };
 
-    if (token) {
-      void fetchSession();
-    } else {
-      void fetchSession();
-    }
-  }, [token]);
+    void fetchSession();
+  }, []);
 
   const refreshSession = async () => {
     try {
@@ -76,27 +59,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = () => {
     setUser(null);
-    setToken(null);
-    localStorage.removeItem("token");
     void apiClient.post("/auth/logout");
     window.location.href = "/login";
-  };
-
-  const setTokenManual = (newToken: string) => {
-    localStorage.setItem("token", newToken);
-    setToken(newToken);
   };
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        token,
         isAuthenticated: !!user,
         loginWithGoogle,
         loginWithGithub,
         logout,
-        setTokenManual,
         refreshSession,
       }}
     >

@@ -14,7 +14,7 @@ import {
   FieldDescription,
   FieldGroup,
   FieldLabel,
-  FieldSeparator, // <--- Added this import
+  FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/context/AuthContext.tsx";
@@ -22,10 +22,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { authService } from "@/services/auth.api.ts";
 
 export function SignupForm({
-                             className,
-                             ...props
-                           }: React.ComponentProps<"div">) {
-  const { setTokenManual, loginWithGoogle, loginWithGithub } = useAuth();
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  const { refreshSession, loginWithGoogle, loginWithGithub } = useAuth();
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState("");
@@ -53,12 +53,12 @@ export function SignupForm({
     }
 
     try {
-      const data = await authService.signup({
+      await authService.signup({
         firstName,
         email,
         password,
       });
-      setTokenManual(data.access_token);
+      await refreshSession();
       navigate("/weather");
     } catch (err: any) {
       const msg = err.response?.data?.message || "Something went wrong";
