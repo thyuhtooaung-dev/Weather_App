@@ -18,11 +18,13 @@ interface AuthContextType {
   refreshSession: () => Promise<boolean>;
 }
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL ?? "https://weather-app-backend-bzxa.onrender.com";
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-
 
   const refreshSession = useCallback(async () => {
     try {
@@ -36,13 +38,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const loginWithGoogle = () => {
-    window.location.href =
-      "https://weather-app-backend-bzxa.onrender.com/auth/google";
+    window.location.href = `${API_BASE_URL}/auth/google`;
   };
 
   const loginWithGithub = () => {
-    window.location.href =
-      "https://weather-app-backend-bzxa.onrender.com/auth/github";
+    window.location.href = `${API_BASE_URL}/auth/github`;
   };
 
   const logout = () => {

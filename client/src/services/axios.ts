@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "https://weather-app-backend-bzxa.onrender.com";
+const API_URL =
+  import.meta.env.VITE_API_URL ?? "https://weather-app-backend-bzxa.onrender.com";
 
 const weatherClient = axios.create({
   baseURL: `https://api.open-meteo.com/v1`,
