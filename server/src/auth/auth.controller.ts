@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
 import * as types from './types';
 import { ConfigService } from '@nestjs/config';
 import { GithubOauthGuard, GoogleOauthGuard } from './guards/oauth.guard';
-import { buildPkcePair, generateRandomToken } from './utils/oauth.util';
+import { generateRandomToken } from './utils/oauth.util';
 import { JwtService } from '@nestjs/jwt';
 
 @Controller('auth')
@@ -24,27 +24,38 @@ export class AuthController {
     private readonly jwtService: JwtService,
   ) {}
 
+  private getCookieSecurityOptions() {
+    const clientUrl = this.configService.get<string>('CLIENT_URL') ?? '';
+    const isLocalClient = /localhost|127\.0\.0\.1/.test(clientUrl);
+
+    return {
+      secure: !isLocalClient,
+      sameSite: (isLocalClient ? 'lax' : 'none') as 'lax' | 'none',
+    };
+  }
+
   private setAccessTokenCookie(
     res: express.Response,
     token: string,
     expiresAt: Date,
   ) {
-    const isProd = this.configService.get<string>('NODE_ENV') === 'production';
+    const cookieSecurityOptions = this.getCookieSecurityOptions();
 
     res.cookie('access_token', token, {
       httpOnly: true,
-      secure: isProd,
-      sameSite: isProd ? 'none' : 'lax',
+      secure: cookieSecurityOptions.secure,
+      sameSite: cookieSecurityOptions.sameSite,
       maxAge: expiresAt.getTime() - Date.now(),
       path: '/',
     });
   }
 
   private getOauthCookieOptions() {
-    const isProd = this.configService.get<string>('NODE_ENV') === 'production';
+    const cookieSecurityOptions = this.getCookieSecurityOptions();
+
     return {
       httpOnly: true,
-      secure: isProd,
+      secure: cookieSecurityOptions.secure,
       sameSite: 'lax' as const,
       maxAge: 10 * 60 * 1000,
       path: '/',
@@ -67,13 +78,10 @@ export class AuthController {
   @Get('google')
   googleAuth(@Res() res: express.Response) {
     const state = generateRandomToken(24);
-    const pkce = buildPkcePair();
 
     const cookieOptions = this.getOauthCookieOptions();
 
     res.cookie('oauth_state', state, cookieOptions);
-    res.cookie('pkce_verifier', pkce.verifier, cookieOptions);
-    res.cookie('pkce_challenge', pkce.challenge, cookieOptions);
 
     return res.redirect(
       `/auth/google/start?state=${encodeURIComponent(state)}`,
@@ -110,8 +118,6 @@ export class AuthController {
 
     this.setAccessTokenCookie(res, result.access_token, result.expiresAt);
     res.clearCookie('oauth_state');
-    res.clearCookie('pkce_verifier');
-    res.clearCookie('pkce_challenge');
 
     res.redirect(`${clientUrl}/weather`);
   }
@@ -119,13 +125,10 @@ export class AuthController {
   @Get('github')
   githubAuth(@Res() res: express.Response) {
     const state = generateRandomToken(24);
-    const pkce = buildPkcePair();
 
     const cookieOptions = this.getOauthCookieOptions();
 
     res.cookie('oauth_state', state, cookieOptions);
-    res.cookie('pkce_verifier', pkce.verifier, cookieOptions);
-    res.cookie('pkce_challenge', pkce.challenge, cookieOptions);
 
     return res.redirect(
       `/auth/github/start?state=${encodeURIComponent(state)}`,
@@ -162,8 +165,6 @@ export class AuthController {
 
     this.setAccessTokenCookie(res, result.access_token, result.expiresAt);
     res.clearCookie('oauth_state');
-    res.clearCookie('pkce_verifier');
-    res.clearCookie('pkce_challenge');
 
     res.redirect(`${clientUrl}/weather`);
   }
@@ -188,13 +189,12 @@ export class AuthController {
       }
     }
 
+    const cookieSecurityOptions = this.getCookieSecurityOptions();
+
     res.clearCookie('access_token', {
       httpOnly: true,
-      secure: this.configService.get<string>('NODE_ENV') === 'production',
-      sameSite:
-        this.configService.get<string>('NODE_ENV') === 'production'
-          ? 'none'
-          : 'lax',
+      secure: cookieSecurityOptions.secure,
+      sameSite: cookieSecurityOptions.sameSite,
       path: '/',
     });
 
