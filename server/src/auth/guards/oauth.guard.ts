@@ -24,8 +24,6 @@ export class GoogleOauthGuard extends AuthGuard('google') {
 
     return {
       state: state ?? cookies.oauth_state,
-      codeChallenge: cookies.pkce_challenge,
-      codeChallengeMethod: 'S256',
     };
   }
 }
@@ -40,8 +38,6 @@ export class GithubOauthGuard extends AuthGuard('github') {
 
     return {
       state: state ?? cookies.oauth_state,
-      codeChallenge: cookies.pkce_challenge,
-      codeChallengeMethod: 'S256',
     };
   }
 }

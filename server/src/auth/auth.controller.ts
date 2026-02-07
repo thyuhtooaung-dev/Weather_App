@@ -24,27 +24,38 @@ export class AuthController {
     private readonly jwtService: JwtService,
   ) {}
 
+  private getCookieSecurityOptions() {
+    const clientUrl = this.configService.get<string>('CLIENT_URL') ?? '';
+    const isLocalClient = /localhost|127\.0\.0\.1/.test(clientUrl);
+
+    return {
+      secure: !isLocalClient,
+      sameSite: (isLocalClient ? 'lax' : 'none') as 'lax' | 'none',
+    };
+  }
+
   private setAccessTokenCookie(
     res: express.Response,
     token: string,
     expiresAt: Date,
   ) {
-    const isProd = this.configService.get<string>('NODE_ENV') === 'production';
+    const cookieSecurityOptions = this.getCookieSecurityOptions();
 
     res.cookie('access_token', token, {
       httpOnly: true,
-      secure: isProd,
-      sameSite: isProd ? 'none' : 'lax',
+      secure: cookieSecurityOptions.secure,
+      sameSite: cookieSecurityOptions.sameSite,
       maxAge: expiresAt.getTime() - Date.now(),
       path: '/',
     });
   }
 
   private getOauthCookieOptions() {
-    const isProd = this.configService.get<string>('NODE_ENV') === 'production';
+    const cookieSecurityOptions = this.getCookieSecurityOptions();
+
     return {
       httpOnly: true,
-      secure: isProd,
+      secure: cookieSecurityOptions.secure,
       sameSite: 'lax' as const,
       maxAge: 10 * 60 * 1000,
       path: '/',
@@ -178,13 +189,12 @@ export class AuthController {
       }
     }
 
+    const cookieSecurityOptions = this.getCookieSecurityOptions();
+
     res.clearCookie('access_token', {
       httpOnly: true,
-      secure: this.configService.get<string>('NODE_ENV') === 'production',
-      sameSite:
-        this.configService.get<string>('NODE_ENV') === 'production'
-          ? 'none'
-          : 'lax',
+      secure: cookieSecurityOptions.secure,
+      sameSite: cookieSecurityOptions.sameSite,
       path: '/',
     });
 
