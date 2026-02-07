@@ -7,20 +7,36 @@ import { GoogleUser } from '../types';
 @Injectable()
 export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
   constructor(configService: ConfigService) {
+    const backendBaseUrl =
+      configService.get<string>('SERVER_URL') ??
+      'https://weather-app-backend-bzxa.onrender.com';
+
     super({
       clientID: configService.getOrThrow<string>('GITHUB_CLIENT_ID'),
       clientSecret: configService.getOrThrow<string>('GITHUB_CLIENT_SECRET'),
       callbackURL:
-        'https://weather-app-backend-bzxa.onrender.com/auth/github/redirect',
+        configService.get<string>('GITHUB_CALLBACK_URL') ??
+        `${backendBaseUrl}/auth/github/redirect`,
       scope: ['user:email'],
     });
+  }
+
+  authorizationParams(options: Record<string, string>) {
+    const params: Record<string, string> = {};
+
+    if (options.codeChallenge) {
+      params.code_challenge = options.codeChallenge;
+      params.code_challenge_method = options.codeChallengeMethod ?? 'S256';
+    }
+
+    return params;
   }
 
   validate(
     accessToken: string,
     refreshToken: string,
     profile: Profile,
-    done: (err: any, user: any) => void,
+    done: (err: Error | null, user?: GoogleUser) => void,
   ) {
     const { username, photos, emails } = profile;
     const user: GoogleUser = {

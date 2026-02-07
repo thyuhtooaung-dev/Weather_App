@@ -7,13 +7,30 @@ import { GoogleUser } from '../types';
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(configService: ConfigService) {
+    const backendBaseUrl =
+      configService.get<string>('SERVER_URL') ??
+      'https://weather-app-backend-bzxa.onrender.com';
+
     super({
       clientID: configService.getOrThrow<string>('GOOGLE_CLIENT_ID'),
       clientSecret: configService.getOrThrow<string>('GOOGLE_CLIENT_SECRET'),
       callbackURL:
-        'https://weather-app-backend-bzxa.onrender.com/auth/google/redirect',
+        configService.get<string>('GOOGLE_CALLBACK_URL') ??
+        `${backendBaseUrl}/auth/google/redirect`,
       scope: ['email', 'profile'],
+      state: true,
     });
+  }
+
+  authorizationParams(options: Record<string, string>) {
+    const params: Record<string, string> = {};
+
+    if (options.codeChallenge) {
+      params.code_challenge = options.codeChallenge;
+      params.code_challenge_method = options.codeChallengeMethod ?? 'S256';
+    }
+
+    return params;
   }
 
   validate(

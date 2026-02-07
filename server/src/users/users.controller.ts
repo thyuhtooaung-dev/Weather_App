@@ -20,7 +20,6 @@ export class UsersController {
     if (!user) {
       throw new NotFoundException('User not found');
     }
-    const { password, ...result } = user;
-    return result;
+    return user;
   }
 }

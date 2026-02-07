@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://weather-app-backend-bzxa.onrender.com"
+const API_URL = "https://weather-app-backend-bzxa.onrender.com";
 
 const weatherClient = axios.create({
   baseURL: `https://api.open-meteo.com/v1`,
@@ -16,17 +16,5 @@ const apiClient = axios.create({
   baseURL: API_URL,
   withCredentials: true,
 });
-apiClient.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
-);
 
-export { weatherClient , geoClient, apiClient };
+export { weatherClient, geoClient, apiClient };

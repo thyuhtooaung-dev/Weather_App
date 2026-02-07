@@ -3,6 +3,7 @@ import { Request } from 'express';
 export interface JwtPayload {
   sub: string;
   email: string;
+  sid: string;
 }
 
 export interface GoogleUser {
@@ -18,6 +19,7 @@ export interface GoogleUser {
 export interface JwtUser {
   userId: string;
   email: string;
+  sessionId: string;
 }
 
 export interface GoogleAuthRequest extends Request {

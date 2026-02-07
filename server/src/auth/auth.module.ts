@@ -9,10 +9,12 @@ import { GoogleStrategy } from './strategies/google.strategy';
 import { GithubStrategy } from './strategies/github.strategy';
 import { User } from '../users/entities/user.entity';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { AuthSession } from './entities/auth-session.entity';
+import { GithubOauthGuard, GoogleOauthGuard } from './guards/oauth.guard';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, AuthSession]),
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
@@ -25,7 +27,14 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     ConfigModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, GoogleStrategy, GithubStrategy, JwtStrategy],
+  providers: [
+    AuthService,
+    GoogleStrategy,
+    GithubStrategy,
+    JwtStrategy,
+    GoogleOauthGuard,
+    GithubOauthGuard,
+  ],
   exports: [AuthService, JwtModule],
 })
 export class AuthModule {}
