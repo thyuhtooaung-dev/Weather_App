@@ -118,16 +118,42 @@ export class AuthService {
     profile: GoogleUser,
     context?: { ipAddress?: string; userAgent?: string },
   ) {
-    let user = await this.userRepo.findOne({ where: { email: profile.email } });
+    const normalizedEmail = profile.email?.trim().toLowerCase();
+
+    if (!normalizedEmail) {
+      throw new BadRequestException(
+        'OAuth provider did not return a usable email address.',
+      );
+    }
+
+    let user = await this.userRepo.findOne({ where: { email: normalizedEmail } });
 
     if (!user) {
       user = this.userRepo.create({
-        email: profile.email,
+        email: normalizedEmail,
         firstName: profile.firstName,
         avatar: profile.picture,
         socialId: profile.socialId,
         provider: profile.provider as 'google' | 'github',
       });
+      await this.userRepo.save(user);
+    } else {
+      if (profile.picture && user.avatar !== profile.picture) {
+        user.avatar = profile.picture;
+      }
+
+      if (profile.firstName && user.firstName !== profile.firstName) {
+        user.firstName = profile.firstName;
+      }
+
+      if (!user.socialId && profile.socialId) {
+        user.socialId = profile.socialId;
+      }
+
+      if (!user.provider || user.provider === 'local') {
+        user.provider = profile.provider as 'google' | 'github';
+      }
+
       await this.userRepo.save(user);
     }
 
