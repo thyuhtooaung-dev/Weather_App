@@ -25,12 +25,12 @@ export class AuthController {
   ) {}
 
   private getCookieSecurityOptions() {
-    const clientUrl = this.configService.get<string>('CLIENT_URL') ?? '';
-    const isLocalClient = /localhost|127\.0\.0\.1/.test(clientUrl);
+    const nodeEnv = this.configService.get<string>('NODE_ENV') ?? '';
+    const isProduction = nodeEnv === 'production';
 
     return {
-      secure: !isLocalClient,
-      sameSite: (isLocalClient ? 'lax' : 'none') as 'lax' | 'none',
+      secure: isProduction,
+      sameSite: (isProduction ? 'none' : 'lax') as 'lax' | 'none',
     };
   }
 
