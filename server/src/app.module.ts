@@ -8,6 +8,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FavoritesModule } from './favorites/favorites.module';
 import { Favorite } from './favorites/entities/favorite.entity';
+import { AuthSession } from './auth/entities/auth-session.entity';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { Favorite } from './favorites/entities/favorite.entity';
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
         url: configService.get('DATABASE_URL'),
-        entities: [User, Favorite],
+        entities: [User, Favorite, AuthSession],
         synchronize: true,
         ssl: true,
         extra: {

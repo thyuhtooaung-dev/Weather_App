@@ -25,7 +25,7 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const { loginWithGoogle, loginWithGithub, setTokenManual } = useAuth();
+  const { loginWithGoogle, loginWithGithub, refreshSession } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -35,11 +35,11 @@ export function LoginForm({
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const data = await authService.login({
+      await authService.login({
         email,
         password,
       });
-      setTokenManual(data.access_token);
+      await refreshSession();
       navigate("/weather");
     } catch (err) {
       setError("Invalid email or password");

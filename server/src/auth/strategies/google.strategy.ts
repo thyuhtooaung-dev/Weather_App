@@ -10,10 +10,21 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     super({
       clientID: configService.getOrThrow<string>('GOOGLE_CLIENT_ID'),
       clientSecret: configService.getOrThrow<string>('GOOGLE_CLIENT_SECRET'),
-      callbackURL:
-        'https://weather-app-backend-bzxa.onrender.com/auth/google/redirect',
+      callbackURL: configService.getOrThrow<string>('GOOGLE_CALLBACK_URL'),
       scope: ['email', 'profile'],
+      state: true,
     });
+  }
+
+  authorizationParams(options: Record<string, string>) {
+    const params: Record<string, string> = {};
+
+    if (options.codeChallenge) {
+      params.code_challenge = options.codeChallenge;
+      params.code_challenge_method = options.codeChallengeMethod ?? 'S256';
+    }
+
+    return params;
   }
 
   validate(
