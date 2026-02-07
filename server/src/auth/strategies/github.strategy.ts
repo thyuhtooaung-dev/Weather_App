@@ -33,14 +33,17 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
     done: (err: Error | null, user?: GoogleUser) => void,
   ) {
     const { username, photos, emails } = profile;
+    const primaryEmail = emails?.[0]?.value;
+
     const user: GoogleUser = {
-      email: emails && emails[0] ? emails[0].value : '',
+      email: primaryEmail ?? '',
       firstName: username || '',
       picture: photos && photos[0] ? photos[0].value : '',
       socialId: profile.id,
       provider: 'github',
       accessToken,
     };
+
     done(null, user);
   }
 }

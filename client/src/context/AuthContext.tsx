@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import * as React from "react";
 import { apiClient } from "@/services/axios.ts";
 
@@ -36,7 +36,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     void fetchSession();
   }, []);
 
-  const refreshSession = async () => {
+  const refreshSession = useCallback(async () => {
     try {
       const res = await apiClient.get("/users/profile");
       setUser(res.data);
@@ -45,7 +45,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(null);
       return false;
     }
-  };
+  }, []);
 
   const loginWithGoogle = () => {
     window.location.href =
