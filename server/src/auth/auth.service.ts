@@ -118,11 +118,7 @@ export class AuthService {
     profile: GoogleUser,
     context?: { ipAddress?: string; userAgent?: string },
   ) {
-    const normalizedEmail = profile.email?.trim().toLowerCase();
-    const fallbackEmail = `${profile.provider}_${profile.socialId}@oauth.local`;
-    const resolvedEmail = normalizedEmail || fallbackEmail;
-
-    let user = await this.userRepo.findOne({ where: { email: resolvedEmail } });
+    let user = await this.userRepo.findOne({ where: { email: profile.email } });
 
     if (!user) {
       user = this.userRepo.create({

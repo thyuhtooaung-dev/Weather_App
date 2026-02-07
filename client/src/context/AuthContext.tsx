@@ -23,6 +23,19 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
+  useEffect(() => {
+    const fetchSession = async () => {
+      try {
+        const res = await apiClient.get("/users/profile");
+        setUser(res.data);
+      } catch {
+        setUser(null);
+      }
+    };
+
+    void fetchSession();
+  }, []);
+
   const refreshSession = useCallback(async () => {
     try {
       const res = await apiClient.get("/users/profile");
@@ -54,16 +67,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     window.location.href = "/login";
   }, []);
 
-  const value = useMemo(
-    () => ({
-      user,
-      isAuthenticated: !!user,
-      loginWithGoogle,
-      loginWithGithub,
-      logout,
-      refreshSession,
-    }),
-    [user, loginWithGoogle, loginWithGithub, logout, refreshSession],
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        isAuthenticated: !!user,
+        loginWithGoogle,
+        loginWithGithub,
+        logout,
+        refreshSession,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
