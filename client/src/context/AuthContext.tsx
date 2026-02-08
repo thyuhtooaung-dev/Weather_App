@@ -19,8 +19,8 @@ interface AuthContextType {
 }
 
 const API_BASE_URL =
-  // import.meta.env.VITE_API_URL ?? "https://weather-app-backend-bzxa.onrender.com";
-  "http://localhost:3000";
+  import.meta.env.VITE_API_URL ?? "https://weather-app-backend-bzxa.onrender.com";
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
