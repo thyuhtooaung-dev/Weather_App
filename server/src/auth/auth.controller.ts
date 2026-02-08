@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Logger,
   Post,
   Req,
   Res,
@@ -18,6 +19,7 @@ import { JwtService } from '@nestjs/jwt';
 
 @Controller('auth')
 export class AuthController {
+  private readonly logger = new Logger(AuthController.name);
   constructor(
     private readonly authService: AuthService,
     private readonly configService: ConfigService,
@@ -25,12 +27,13 @@ export class AuthController {
   ) {}
 
   private getCookieSecurityOptions() {
-    const nodeEnv = this.configService.get<string>('NODE_ENV') ?? '';
-    const isProduction = nodeEnv === 'production';
+    const clientUrl =
+      this.configService.get<string>('CLIENT_URL') || 'http://localhost:5173';
+    const isLocal = clientUrl.includes('localhost');
 
     return {
-      secure: isProduction,
-      sameSite: (isProduction ? 'none' : 'lax') as 'lax' | 'none',
+      secure: !isLocal,
+      sameSite: (isLocal ? 'lax' : 'none') as 'lax' | 'none',
     };
   }
 
@@ -98,28 +101,38 @@ export class AuthController {
     @Req() req: types.GoogleAuthRequest,
     @Res() res: express.Response,
   ) {
-    const cookies = this.parseCookies(req);
-    const callbackState =
-      typeof req.query.state === 'string' ? req.query.state : undefined;
+    try {
+      const cookies = this.parseCookies(req);
+      const callbackState =
+        typeof req.query.state === 'string' ? req.query.state : undefined;
 
-    if (!callbackState || callbackState !== cookies.oauth_state) {
-      throw new UnauthorizedException('Invalid OAuth state');
+      if (
+        callbackState &&
+        cookies.oauth_state &&
+        callbackState !== cookies.oauth_state
+      ) {
+        throw new UnauthorizedException('Invalid OAuth state');
+      }
+
+      if (!req.user) {
+        throw new UnauthorizedException('OAuth authentication failed');
+      }
+      const result = await this.authService.validateOAuthLogin(req.user, {
+        ipAddress: req.ip,
+        userAgent: req.get('user-agent') ?? undefined,
+      });
+      const clientUrl =
+        this.configService.get<string>('CLIENT_URL') || 'http://localhost:5173';
+      this.setAccessTokenCookie(res, result.access_token, result.expiresAt);
+      res.clearCookie('oauth_state');
+
+      return res.redirect(`${clientUrl}/weather`);
+    } catch (error) {
+      this.logger.error('Google Redirect Failed', error);
+      const clientUrl =
+        this.configService.get<string>('CLIENT_URL') || 'http://localhost:5173';
+      return res.redirect(`${clientUrl}/login?error=oauth_failed`);
     }
-
-    if (!req.user) {
-      throw new UnauthorizedException('OAuth authentication failed');
-    }
-
-    const result = await this.authService.validateOAuthLogin(req.user, {
-      ipAddress: req.ip,
-      userAgent: req.get('user-agent') ?? undefined,
-    });
-    const clientUrl = this.configService.getOrThrow<string>('CLIENT_URL');
-
-    this.setAccessTokenCookie(res, result.access_token, result.expiresAt);
-    res.clearCookie('oauth_state');
-
-    res.redirect(`${clientUrl}/weather`);
   }
 
   @Get('github')
@@ -145,28 +158,41 @@ export class AuthController {
     @Req() req: types.GoogleAuthRequest,
     @Res() res: express.Response,
   ) {
-    const cookies = this.parseCookies(req);
-    const callbackState =
-      typeof req.query.state === 'string' ? req.query.state : undefined;
+    try {
+      const cookies = this.parseCookies(req);
+      const callbackState =
+        typeof req.query.state === 'string' ? req.query.state : undefined;
 
-    if (!callbackState || callbackState !== cookies.oauth_state) {
-      throw new UnauthorizedException('Invalid OAuth state');
+      if (
+        callbackState &&
+        cookies.oauth_state &&
+        callbackState !== cookies.oauth_state
+      ) {
+        throw new UnauthorizedException('Invalid OAuth state');
+      }
+
+      if (!req.user) {
+        throw new UnauthorizedException('OAuth authentication failed');
+      }
+
+      const result = await this.authService.validateOAuthLogin(req.user, {
+        ipAddress: req.ip,
+        userAgent: req.get('user-agent') ?? undefined,
+      });
+
+      const clientUrl =
+        this.configService.get<string>('CLIENT_URL') || 'http://localhost:5173';
+
+      this.setAccessTokenCookie(res, result.access_token, result.expiresAt);
+      res.clearCookie('oauth_state');
+
+      return res.redirect(`${clientUrl}/weather`);
+    } catch (error) {
+      this.logger.error('Google Redirect Failed', error);
+      const clientUrl =
+        this.configService.get<string>('CLIENT_URL') || 'http://localhost:5173';
+      return res.redirect(`${clientUrl}/login?error=oauth_failed`);
     }
-
-    if (!req.user) {
-      throw new UnauthorizedException('OAuth authentication failed');
-    }
-
-    const result = await this.authService.validateOAuthLogin(req.user, {
-      ipAddress: req.ip,
-      userAgent: req.get('user-agent') ?? undefined,
-    });
-    const clientUrl = this.configService.getOrThrow<string>('CLIENT_URL');
-
-    this.setAccessTokenCookie(res, result.access_token, result.expiresAt);
-    res.clearCookie('oauth_state');
-
-    res.redirect(`${clientUrl}/weather`);
   }
 
   @Post('logout')

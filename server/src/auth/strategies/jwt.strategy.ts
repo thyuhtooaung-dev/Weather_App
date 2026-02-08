@@ -1,4 +1,5 @@
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { Request } from 'express';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -14,27 +15,21 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
         ExtractJwt.fromAuthHeaderAsBearerToken(),
-        (request: {
-          cookies?: Record<string, string>;
-          headers?: { cookie?: string };
-        }) => {
-          if (request.cookies?.access_token) {
+        (request: Request) => {
+          if (request.cookies && request.cookies.access_token) {
             return request.cookies.access_token;
           }
-
           const cookieHeader = request.headers?.cookie;
-          if (!cookieHeader) {
-            return null;
-          }
-
+          if (!cookieHeader) return null;
           const tokenCookie = cookieHeader
             .split(';')
-            .map((cookie) => cookie.trim())
-            .find((cookie) => cookie.startsWith('access_token='));
+            .map((c) => c.trim())
+            .find((c) => c.startsWith('access_token='));
 
-          return tokenCookie
-            ? decodeURIComponent(tokenCookie.split('=')[1] ?? '')
-            : null;
+          if (!tokenCookie) return null;
+          return decodeURIComponent(
+            tokenCookie.substring(tokenCookie.indexOf('=') + 1),
+          );
         },
       ]),
       ignoreExpiration: false,

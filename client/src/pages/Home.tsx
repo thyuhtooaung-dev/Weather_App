@@ -14,8 +14,10 @@ import {
 } from "@/components/WeatherSkeleton.tsx";
 import ApiErrorState from "@/components/ApiErrorState.tsx";
 import { getCityName } from "@/services/geoService.api.ts";
+import { useTheme } from "@/context/ThemeContext.tsx";
 
 export default function Home() {
+  const { setWeatherIsDay } = useTheme();
   const [location, setLocation] = useState({
     lat: 52.52,
     lon: 13.41,
@@ -50,6 +52,12 @@ export default function Home() {
       );
     }
   }, []);
+
+  useEffect(() => {
+    if (weather && weather.current) {
+      setWeatherIsDay(weather.current.is_day === 1);
+    }
+  }, [weather, setWeatherIsDay]);
 
   const handleLocationSelect = (
     lat: number,

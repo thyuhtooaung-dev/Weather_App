@@ -10,9 +10,10 @@ export const getWeather = async (
       latitude: lat,
       longitude: lon,
       hourly: "temperature_2m,weather_code",
-      daily: "temperature_2m_max,temperature_2m_min,weather_code,uv_index_max,sunrise,sunset",
+      daily:
+        "temperature_2m_max,temperature_2m_min,weather_code,uv_index_max,sunrise,sunset",
       current:
-        "temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,precipitation,weather_code,pressure_msl,visibility",
+        "temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,precipitation,weather_code,pressure_msl,visibility,is_day",
       timezone: "auto",
     },
   });

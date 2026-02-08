@@ -16,6 +16,7 @@ export interface WeatherData {
     precipitation: string;
     pressure_msl: number;
     visibility: number
+    is_day: string
   };
   current: {
     time: string;
@@ -28,6 +29,7 @@ export interface WeatherData {
     weather_code: number;
     pressure_msl: number;
     visibility: number;
+    is_day: number
   };
   hourly_units: {
     time: string;

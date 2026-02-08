@@ -12,7 +12,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       clientSecret: configService.getOrThrow<string>('GOOGLE_CLIENT_SECRET'),
       callbackURL: configService.getOrThrow<string>('GOOGLE_CALLBACK_URL'),
       scope: ['email', 'profile'],
-      state: true,
+      state: false,
     });
   }
 
@@ -22,6 +22,10 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     if (options.codeChallenge) {
       params.code_challenge = options.codeChallenge;
       params.code_challenge_method = options.codeChallengeMethod ?? 'S256';
+    }
+
+    if (options.state) {
+      params.state = options.state;
     }
 
     return params;
@@ -39,7 +43,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       email: emails && emails[0] ? emails[0].value : '',
       firstName: name ? name.givenName : '',
       lastName: name ? name.familyName : '',
-      picture: photos && photos[0] ? photos[0].value : '',
+      picture: photos && photos.length > 0 ? photos[0].value : '',
       socialId: profile.id,
       provider: 'google',
       accessToken,

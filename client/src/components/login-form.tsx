@@ -25,7 +25,7 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const { loginWithGoogle, loginWithGithub, refreshSession } = useAuth();
+  const { loginWithGoogle, loginWithGithub, refreshSession, logout } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -143,21 +143,21 @@ export function LoginForm({
                 </Button>
                 <FieldDescription className="text-center text-neutral-200">
                   Don&apos;t have an account?{" "}
-                  <Link
-                    to="/signup"
-                    className={
-                      "text-neutral-400 hover:text-white text-sm font-medium transition-colors"
-                    }
+                  <button
+                    type="button"
+                    onClick={() => navigate("/signup")}
+                    className="text-neutral-400 hover:text-white text-sm font-medium transition-colors bg-transparent border-none cursor-pointer underline-offset-4 hover:underline"
                   >
-                    Sign up
-                  </Link>{" "}
+                    Sign Up
+                  </button>{" "}
                   Or{" "}
-                  <Link
-                    to="/weather"
-                    className="text-neutral-400 hover:text-white text-sm font-medium transition-colors"
+                  <button
+                    type="button"
+                    onClick={() => logout("/weather")}
+                    className="text-neutral-400 hover:text-white text-sm font-medium transition-colors bg-transparent border-none cursor-pointer underline-offset-4 hover:underline"
                   >
                     Continue as Guest
-                  </Link>
+                  </button>
                 </FieldDescription>
               </Field>
             </FieldGroup>

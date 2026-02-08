@@ -14,13 +14,13 @@ interface AuthContextType {
   isAuthenticated: boolean;
   loginWithGoogle: () => void;
   loginWithGithub: () => void;
-  logout: () => void;
+  logout: (redirectPath?: string) => void;
   refreshSession: () => Promise<boolean>;
 }
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL ?? "https://weather-app-backend-bzxa.onrender.com";
-
+  // import.meta.env.VITE_API_URL ?? "https://weather-app-backend-bzxa.onrender.com";
+  "http://localhost:3000";
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -45,10 +45,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     window.location.href = `${API_BASE_URL}/auth/github`;
   };
 
-  const logout = () => {
+  const logout = async (redirectPath = "/login") => {
     setUser(null);
-    void apiClient.post("/auth/logout");
-    window.location.href = "/login";
+
+    try {
+      await apiClient.post("/auth/logout");
+    } catch (error) {
+      console.error("Logout failed", error);
+    } finally {
+      window.location.href = redirectPath;
+    }
   };
 
   return (
