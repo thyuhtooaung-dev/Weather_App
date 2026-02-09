@@ -73,7 +73,7 @@ export default function Home() {
       <div className="w-full p-4 flex flex-col gap-6 justify-center items-center xl:p-8 lg:px-10 lg:py-6 xl:px-18">
         <Navbar onSelectCity={handleLocationSelect} />
         <header className="w-full">
-          <h1 className="text-5xl lg:text-6xl text-center font-extrabold font-display my-6 px-4 text-neutral-0">
+          <h1 className="text-5xl lg:text-6xl text-center font-extrabold font-display my-6 px-4 text-neutral-900 dark:text-neutral-0">
             How's the sky looking today?
           </h1>
         </header>
@@ -115,7 +115,7 @@ export default function Home() {
       <header className="w-full">
         <h1
           className={
-            "text-5xl lg:text-6xl text-center font-extrabold font-display my-6 px-4 text-neutral-0"
+            "text-5xl lg:text-6xl text-center font-extrabold font-display my-6 px-4 dark:text-neutral-0 text-neutral-900"
           }
         >
           How's the sky looking today?

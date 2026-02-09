@@ -199,7 +199,7 @@ export function SignupForm({
                   </Field>
                 </Field>
                 <FieldDescription>
-                  Must be at least 8 characters long.
+                  Must be at least 12 characters long.
                 </FieldDescription>
               </Field>
               <Field>

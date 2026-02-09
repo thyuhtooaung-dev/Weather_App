@@ -14,9 +14,9 @@ export default function DailyForecast({weather}: {weather: WeatherData}) {
         {dailyForecasts(weather).map((day) => (
           <div
             key={day.time}
-            className="bg-neutral-800 p-2 rounded-xl flex flex-col gap-4"
+            className="dark:bg-neutral-800 bg-neutral-100 p-2 rounded-xl flex flex-col gap-4"
           >
-            <p className={"text-center text-neutral-0"}>
+            <p className={"text-center dark:text-neutral-0 text-neutral-900"}>
               {new Date(day.time).toLocaleDateString("en-US", {
                 weekday: "short",
               })}
@@ -27,8 +27,12 @@ export default function DailyForecast({weather}: {weather: WeatherData}) {
               className="size-20 mx-auto"
             />
             <div className="flex justify-between items-center">
-              <p className="font-bold">{formatTemp(day.maxTemp)}</p>
-              <span className="text-neutral-200 text-sm">{formatTemp(day.minTemp)}</span>
+              <p className="font-bold dark:text-neutral-0 text-neutral-900">
+                {formatTemp(day.maxTemp)}
+              </p>
+              <span className="dark:text-neutral-200 text-neutral-900 text-sm">
+                {formatTemp(day.minTemp)}
+              </span>
             </div>
           </div>
         ))}

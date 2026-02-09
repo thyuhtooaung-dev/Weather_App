@@ -26,13 +26,30 @@
 
 @layer base {
   body {
-    @apply font-sans text-neutral-200 bg-neutral-900 flex flex-col justify-center items-center min-h-screen;
+    @apply font-sans  dark:text-neutral-200 dark:bg-neutral-900 bg-neutral-0 text-neutral-900 flex flex-col justify-center items-center min-h-screen;
   }
   #root {
     @apply w-full
   }
-}
 
+  :root {
+    --background: 250 6% 84%;
+    --foreground: 243 96% 9%;
+
+    --popover: 250 6% 84%;
+    --popover-foreground: 243 96% 9%;
+    --border: 243 96% 20% / 0.1;
+  }
+
+  .dark {
+    --background: 243 96% 9%;
+    --foreground: 0 0% 100%;
+
+    --popover: 243 96% 9%;
+    --popover-foreground: 0 0% 100%;
+    --border: 250 6% 84% / 0.2;
+  }
+}
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
