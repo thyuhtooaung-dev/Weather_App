@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="286" fill="none" viewBox="0 0 800 286">
+    <g clip-path="url(#clip)">
+        <rect width="800" height="286" fill="url(#stormSky)" rx="20"/>
+        <circle cx="550" cy="120" r="200" fill="url(#flashGlow)" opacity="0.6"/>
+        <path fill="url(#stormCloud)" d="M-20 100c100-20 200 20 300 0 100-30 200-40 300-20 100-20 150 10 240 30v100H-20V100z" opacity="0.7"/>
+        <path fill="#FFFDE7" opacity=".3" d="M550 20l-40 80h30l-20 100 60-110h-35l45-70h-40z"/>
+        <g stroke="url(#stormRain)" stroke-width="1.5" stroke-linecap="round" opacity="0.5">
+            <line x1="100" y1="40" x2="90" y2="70"/><line x1="200" y1="60" x2="190" y2="90"/>
+            <line x1="350" y1="120" x2="340" y2="150"/><line x1="500" y1="140" x2="490" y2="170"/>
+            <line x1="650" y1="40" x2="640" y2="70"/><line x1="750" y1="200" x2="740" y2="230"/>
+        </g>
+    </g>
+    <defs>
+        <linearGradient id="stormSky" x1="400" x2="400" y1="0" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#1A1333"/><stop offset="1" stop-color="#0D091A"/>
+        </linearGradient>
+        <radialGradient id="flashGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(550 120) rotate(90) scale(200)">
+            <stop stop-color="#FFFDE7" stop-opacity="0.8"/><stop offset="1" stop-color="#1A1333" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="stormCloud" x1="400" x2="400" y1="60" y2="200" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#3E335E"/><stop offset="1" stop-color="#1A1333"/>
+        </linearGradient>
+        <linearGradient id="stormRain" x1="0" x2="0" y1="0" y2="1">
+            <stop stop-color="#B39DDB" stop-opacity="0.6"/><stop offset="1" stop-color="#B39DDB" stop-opacity="0.1"/>
+        </linearGradient>
+        <clipPath id="clip"><rect width="800" height="286" rx="20"/></clipPath>
+    </defs>
+</svg>

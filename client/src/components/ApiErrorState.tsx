@@ -22,12 +22,12 @@ export default function ApiErrorState<TData, TError>({
           className={"mx-auto size-8"}
         />
       </div>
-      <h1 className={"text-neutral-0 text-3xl lg:text-4xl xl:text-5xl font-extrabold"}>Something went wrong</h1>
+      <h1 className={"dark:text-neutral-0 text-neutral-900 text-3xl lg:text-4xl xl:text-5xl font-extrabold"}>Something went wrong</h1>
       <p className={"text-xl font-semibold"}>
         We couldn't connect to the server (API error). Please try again in a few
         moments
       </p>
-      <Button className={"max-w-25 bg-neutral-600 border-none cursor-pointer mx-auto p-5"}  onClick={() => refetch()} variant="outline">
+      <Button className={"max-w-25 dark:bg-neutral-600 bg-neutral-300 hover:bg-neutral-300 border-none cursor-pointer mx-auto p-5"}  onClick={() => refetch()} variant="outline">
         <img src="/images/icon-retry.svg" alt={"retry icon"}/>
         Retry
       </Button>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="343" height="286" fill="none" viewBox="0 0 343 286">
+    <g clip-path="url(#clip)">
+        <rect width="343" height="286" fill="url(#nightSkyGrad)" rx="20"/>
+
+        <circle cx="280" cy="50" r="180" fill="url(#moonlightGlow)" opacity="0.3"/>
+
+        <path fill="url(#moonCore)" d="M295 35a40 40 0 1 1-43.5 61.8 32 32 0 1 0 43.5-61.8z"/>
+
+        <path fill="#fff" d="m60 40 1.5-3 .05 3.5 3-2-1.7 3.1 3.7-.5-3.1 2 3.5 1.2-3.7.4 2.5 2.6-3.5-1.3.9 3.4-2.4-2.7-.8 3.5-.8-3.5-2.4 2.7.9-3.4-3.5 1.3 2.5-2.6-3.7-.4 3.5-1.2-3.1-2 3.7.5-1.7-3.1 3 2-.05-3.5 1.5 3z" opacity=".4"/>
+        <path fill="#fff" d="m120 220 1.5-3 .05 3.5 3-2-1.7 3.1 3.7-.5-3.1 2 3.5 1.2-3.7.4 2.5 2.6-3.5-1.3.9 3.4-2.4-2.7-.8 3.5-.8-3.5-2.4 2.7.9-3.4-3.5 1.3 2.5-2.6-3.7-.4 3.5-1.2-3.1-2 3.7.5-1.7-3.1 3 2-.05-3.5 1.5 3z" opacity=".3"/>
+        <path fill="#fff" d="m280 240 1.5-3 .05 3.5 3-2-1.7 3.1 3.7-.5-3.1 2 3.5 1.2-3.7.4 2.5 2.6-3.5-1.3.9 3.4-2.4-2.7-.8 3.5-.8-3.5-2.4 2.7.9-3.4-3.5 1.3 2.5-2.6-3.7-.4 3.5-1.2-3.1-2 3.7.5-1.7-3.1 3 2-.05-3.5 1.5 3z" opacity=".4"/>
+    </g>
+
+    <defs>
+        <linearGradient id="nightSkyGrad" x1="171.5" x2="171.5" y1="0" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#1A1C2C"/>
+            <stop offset="1" stop-color="#07080F"/>
+        </linearGradient>
+
+        <radialGradient id="moonlightGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(280 50) rotate(90) scale(180)">
+            <stop stop-color="#5C6BC0" stop-opacity="0.5"/>
+            <stop offset="1" stop-color="#1A1C2C" stop-opacity="0"/>
+        </radialGradient>
+
+        <linearGradient id="moonCore" x1="280" x2="280" y1="20" y2="100" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFFFFF"/>
+            <stop offset="1" stop-color="#94A3B8"/>
+        </linearGradient>
+
+        <clipPath id="clip">
+            <rect width="343" height="286" rx="20"/>
+        </clipPath>
+    </defs>
+</svg>

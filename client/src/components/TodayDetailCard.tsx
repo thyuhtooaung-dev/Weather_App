@@ -3,7 +3,7 @@ import { useFormatWeather } from "@/hooks/useFormatWeather.ts";
 import { useSunPosition } from "@/hooks/useSunPosition.ts";
 
 const detailCardStyle =
-  "dark:bg-neutral-800 bg-neutral-100 py-3 px-5 flex flex-col gap-6 rounded-lg";
+  "dark:bg-neutral-800 bg-[#ececec] py-3 px-5 flex flex-col gap-6 rounded-lg";
 
 export default function TodayDetailCard({weather}: { weather: WeatherData }) {
   const { formatTemp, formatSpeed, formatPrecipitation, formatUv, formatPressure, formatVisibility, formatSunTime } = useFormatWeather();

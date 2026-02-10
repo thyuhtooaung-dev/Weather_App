@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="343" height="286" fill="none" viewBox="0 0 343 286">
+    <g clip-path="url(#clip)">
+        <rect width="343" height="286" fill="url(#nightSkyGrad)" rx="20"/>
+
+        <circle cx="280" cy="60" r="100" fill="url(#moonGlow)" opacity="0.5"/>
+
+        <path fill="url(#moonCore)" d="M295 40a35 35 0 1 1-38 54 28 28 0 1 0 38-54z"/>
+
+        <path fill="url(#cloudFarNight)" d="M-50 220c30-20 70-20 100 0s70 20 100 0 70-20 100 0 70 20 100 0v100H-50V220z" opacity="0.3"/>
+
+        <path fill="url(#cloudNearNight)" d="M120 286c0-35 30-65 65-65 10 0 20 3 30 8 15-25 45-42 80-42 50 0 90 40 90 90v9H120v-0z" opacity="0.85"/>
+
+        <path fill="#fff" d="m40 50 1.5-3 .05 3.5 3-2-1.7 3.1 3.7-.5-3.1 2 3.5 1.2-3.7.4 2.5 2.6-3.5-1.3.9 3.4-2.4-2.7-.8 3.5-.8-3.5-2.4 2.7.9-3.4-3.5 1.3 2.5-2.6-3.7-.4 3.5-1.2-3.1-2 3.7.5-1.7-3.1 3 2-.05-3.5 1.5 3z" opacity=".4"/>
+    </g>
+
+    <defs>
+        <linearGradient id="nightSkyGrad" x1="0" x2="343" y1="0" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#1A1C2C"/>
+            <stop offset="1" stop-color="#07080F"/>
+        </linearGradient>
+
+        <radialGradient id="moonGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(280 60) rotate(90) scale(100)">
+            <stop stop-color="#5C6BC0" stop-opacity="0.4"/>
+            <stop offset="1" stop-color="#5C6BC0" stop-opacity="0"/>
+        </radialGradient>
+
+        <linearGradient id="moonCore" x1="280" x2="280" y1="25" y2="95" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFFFFF"/>
+            <stop offset="1" stop-color="#94A3B8"/>
+        </linearGradient>
+
+        <linearGradient id="cloudFarNight" x1="171" x2="171" y1="200" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#2D325A"/>
+            <stop offset="1" stop-color="#07080F"/>
+        </linearGradient>
+
+        <linearGradient id="cloudNearNight" x1="245" x2="245" y1="180" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#94A3B8"/>
+            <stop offset="1" stop-color="#1A1C2C"/>
+        </linearGradient>
+
+        <clipPath id="clip">
+            <rect width="343" height="286" rx="20"/>
+        </clipPath>
+    </defs>
+</svg>

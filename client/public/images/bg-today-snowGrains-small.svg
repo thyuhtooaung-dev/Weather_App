@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="343" height="286" fill="none" viewBox="0 0 343 286">
+    <g clip-path="url(#clip)">
+        <rect width="343" height="286" fill="url(#grainSky)" rx="20"/>
+
+        <path fill="url(#ceilingGrad)" d="M-10 80c50-5 100 5 150 0s100-5 150 0 60 5 100 0v-90H-10v90z" opacity="0.4"/>
+
+        <g fill="#fff" opacity="0.8">
+            <circle cx="30" cy="40" r="0.8"/><circle cx="80" cy="30" r="0.6"/><circle cx="140" cy="50" r="0.8"/><circle cx="210" cy="25" r="0.7"/>
+            <circle cx="270" cy="45" r="0.8"/><circle cx="320" cy="35" r="0.6"/><circle cx="55" cy="90" r="0.7"/><circle cx="110" cy="80" r="0.8"/>
+            <circle cx="180" cy="100" r="0.6"/><circle cx="250" cy="85" r="0.7"/><circle cx="300" cy="110" r="0.8"/><circle cx="40" cy="150" r="0.7"/>
+            <circle cx="95" cy="140" r="0.8"/><circle cx="165" cy="160" r="0.6"/><circle cx="230" cy="145" r="0.7"/><circle cx="290" cy="170" r="0.8"/>
+            <circle cx="20" cy="210" r="0.7"/><circle cx="75" cy="200" r="0.8"/><circle cx="130" cy="220" r="0.6"/><circle cx="200" cy="205" r="0.7"/>
+            <circle cx="265" cy="230" r="0.8"/><circle cx="330" cy="215" r="0.7"/><circle cx="60" cy="260" r="0.8"/><circle cx="150" cy="250" r="0.6"/>
+            <circle cx="240" cy="270" r="0.7"/><circle cx="310" cy="255" r="0.8"/>
+        </g>
+
+        <path fill="url(#iceMist)" d="M0 240c60-10 120 10 180 0s120-10 180 0v46H0v-46z" opacity="0.6"/>
+    </g>
+
+    <defs>
+        <linearGradient id="grainSky" x1="171.5" x2="171.5" y1="0" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#3D4566"/>
+            <stop offset="1" stop-color="#24293E"/>
+        </linearGradient>
+
+        <linearGradient id="ceilingGrad" x1="171.5" x2="171.5" y1="-10" y2="80" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#1E2235"/>
+            <stop offset="1" stop-color="#3D4566" stop-opacity="0"/>
+        </linearGradient>
+
+        <linearGradient id="iceMist" x1="171.5" x2="171.5" y1="240" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#94A3B8" stop-opacity="0"/>
+            <stop offset="1" stop-color="#CBD5E1" stop-opacity="0.5"/>
+        </linearGradient>
+
+        <clipPath id="clip">
+            <rect width="343" height="286" rx="20"/>
+        </clipPath>
+    </defs>
+</svg>

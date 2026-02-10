@@ -208,7 +208,7 @@ export function SignupForm({
                   type="submit"
                   disabled={loading}
                   className={
-                    "cursor-pointer py-5 bg-blue-700 font-display text-base"
+                    "cursor-pointer py-5 bg-blue-700 font-display text-base text-neutral-200"
                   }
                 >
                   Create Account

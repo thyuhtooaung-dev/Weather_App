@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="286" fill="none" viewBox="0 0 800 286">
+    <g clip-path="url(#clip)">
+        <rect width="800" height="286" fill="url(#snowSky)" rx="20"/>
+        <circle cx="400" cy="-10" r="300" fill="url(#winterGlow)" opacity="0.4"/>
+        <g fill="#fff" opacity="0.4">
+            <circle cx="50" cy="50" r="1.5"/><circle cx="150" cy="30" r="1"/><circle cx="250" cy="60" r="1.2"/>
+            <circle cx="350" cy="40" r="1"/><circle cx="450" cy="110" r="1"/><circle cx="550" cy="90" r="1.5"/>
+            <circle cx="650" cy="120" r="1"/><circle cx="750" cy="80" r="1.2"/>
+        </g>
+        <g fill="#fff" opacity="0.7">
+            <circle cx="100" cy="180" r="2.5"/><circle cx="200" cy="150" r="2"/><circle cx="300" cy="190" r="2.2"/>
+            <circle cx="400" cy="160" r="2.5"/><circle cx="500" cy="240" r="2"/><circle cx="600" cy="220" r="2.5"/>
+            <circle cx="700" cy="250" r="2"/><circle cx="780" cy="210" r="2.2"/>
+        </g>
+        <path fill="url(#snowDrift)" d="M-20 286c0-30 100-50 200-50s150 20 250 20 150-30 250-30 100 20 140 40v20H-20v-0z" opacity="0.9"/>
+    </g>
+    <defs>
+        <linearGradient id="snowSky" x1="400" x2="400" y1="0" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#2E335A"/><stop offset="1" stop-color="#1C1B33"/>
+        </linearGradient>
+        <radialGradient id="winterGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(400 -10) rotate(90) scale(300)">
+            <stop stop-color="#C2C9FF" stop-opacity="0.5"/><stop offset="1" stop-color="#2E335A" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="snowDrift" x1="400" x2="400" y1="226" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#A5B1FF"/>
+        </linearGradient>
+        <clipPath id="clip"><rect width="800" height="286" rx="20"/></clipPath>
+    </defs>
+</svg>

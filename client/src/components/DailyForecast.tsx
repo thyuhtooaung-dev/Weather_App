@@ -14,7 +14,7 @@ export default function DailyForecast({weather}: {weather: WeatherData}) {
         {dailyForecasts(weather).map((day) => (
           <div
             key={day.time}
-            className="dark:bg-neutral-800 bg-neutral-100 p-2 rounded-xl flex flex-col gap-4"
+            className="dark:bg-neutral-800 bg-[#ececec] p-2 rounded-xl flex flex-col gap-4"
           >
             <p className={"text-center dark:text-neutral-0 text-neutral-900"}>
               {new Date(day.time).toLocaleDateString("en-US", {

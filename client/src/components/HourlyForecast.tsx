@@ -28,7 +28,7 @@ export default function HourlyForecast({ weather }: { weather: WeatherData }) {
   });
 
   return (
-    <div className="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-xl h-full flex flex-col max-h-200 transition-colors">
+    <div className="bg-[#ececec] dark:bg-neutral-800 p-4 rounded-xl h-full flex flex-col max-h-200 transition-colors">
       <header className="flex items-center justify-between mb-4 shrink-0">
         <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-0">
           Hourly forecast

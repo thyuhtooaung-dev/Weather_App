@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="286" fill="none" viewBox="0 0 800 286">
+    <g clip-path="url(#clip)">
+        <rect width="800" height="286" fill="url(#grainSky)" rx="20"/>
+        <path fill="url(#ceilingGrad)" d="M-10 80c100-5 250 5 400 0s300-5 420 0v-90H-10v90z" opacity="0.4"/>
+        <g fill="#fff" opacity="0.8">
+            <circle cx="50" cy="40" r="0.8"/><circle cx="150" cy="30" r="0.6"/><circle cx="250" cy="50" r="0.8"/><circle cx="350" cy="25" r="0.7"/><circle cx="450" cy="45" r="0.8"/><circle cx="550" cy="35" r="0.6"/><circle cx="650" cy="90" r="0.7"/><circle cx="750" cy="80" r="0.8"/>
+            <circle cx="100" cy="150" r="0.7"/><circle cx="250" cy="140" r="0.8"/><circle cx="400" cy="160" r="0.6"/><circle cx="550" cy="145" r="0.7"/><circle cx="700" cy="170" r="0.8"/>
+            <circle cx="80" cy="210" r="0.7"/><circle cx="220" cy="200" r="0.8"/><circle cx="380" cy="220" r="0.6"/><circle cx="520" cy="205" r="0.7"/><circle cx="680" cy="230" r="0.8"/>
+        </g>
+        <path fill="url(#iceMist)" d="M0 240c150-10 350 10 500 0s200-10 300 0v46H0v-46z" opacity="0.6"/>
+    </g>
+    <defs>
+        <linearGradient id="grainSky" x1="400" x2="400" y1="0" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#3D4566"/><stop offset="1" stop-color="#24293E"/>
+        </linearGradient>
+        <linearGradient id="ceilingGrad" x1="400" x2="400" y1="-10" y2="80" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#1E2235"/><stop offset="1" stop-color="#3D4566" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="iceMist" x1="400" x2="400" y1="240" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#94A3B8" stop-opacity="0"/><stop offset="1" stop-color="#CBD5E1" stop-opacity="0.5"/>
+        </linearGradient>
+        <clipPath id="clip"><rect width="800" height="286" rx="20"/></clipPath>
+    </defs>
+</svg>

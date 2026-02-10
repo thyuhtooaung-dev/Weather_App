@@ -70,7 +70,7 @@ export default function Searchbar({
         <Input
           placeholder="Search for a place..."
           className="pl-12 py-6 border-none cursor-pointer focus:outline transition-colors
-            bg-neutral-100 dark:bg-neutral-700
+            bg-[#ececec] dark:bg-neutral-700
             text-neutral-900 dark:text-neutral-200
             placeholder:text-neutral-600 dark:placeholder:text-neutral-400"
           value={query}

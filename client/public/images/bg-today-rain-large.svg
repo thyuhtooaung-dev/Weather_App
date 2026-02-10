@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="286" fill="none" viewBox="0 0 800 286">
+    <g clip-path="url(#clip)">
+        <rect width="800" height="286" fill="url(#rainSkyLarge)" rx="20"/>
+
+        <path fill="url(#cloudMidLarge)" d="M-50 120c80-15 180 15 350 0s180-15 280 0 150 15 220 0v100H-50V120z" opacity="0.4"/>
+
+        <g stroke="url(#rainDropLarge)" stroke-width="1.5" stroke-linecap="round" opacity="0.6">
+            <line x1="100" y1="30" x2="92" y2="55"/><line x1="250" y1="20" x2="242" y2="45"/>
+            <line x1="400" y1="40" x2="392" y2="65"/><line x1="550" y1="25" x2="542" y2="50"/>
+            <line x1="700" y1="35" x2="692" y2="60"/><line x1="50" y1="110" x2="42" y2="135"/>
+            <line x1="180" y1="120" x2="172" y2="145"/><line x1="330" y1="100" x2="322" y2="125"/>
+            <line x1="480" y1="130" x2="472" y2="155"/><line x1="630" y1="115" x2="622" y2="140"/>
+            <line x1="780" y1="125" x2="772" y2="150"/><line x1="120" y1="200" x2="112" y2="225"/>
+            <line x1="270" y1="190" x2="262" y2="215"/><line x1="420" y1="210" x2="412" y2="235"/>
+            <line x1="570" y1="200" x2="562" y2="225"/><line x1="720" y1="220" x2="712" y2="245"/>
+        </g>
+
+        <path fill="url(#cloudFrontLarge)" d="M480 286c0-30 35-55 70-55 10 0 22 3 32 8 18-20 48-35 85-35 40 0 75 18 85 48 8-2 15-3 22-3 30 0 56 20 56 45v10H480v-18z" opacity="0.85"/>
+    </g>
+    <defs>
+        <linearGradient id="rainSkyLarge" x1="400" x2="400" y1="0" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4B618E"/><stop offset="1" stop-color="#263147"/>
+        </linearGradient>
+        <linearGradient id="cloudMidLarge" x1="400" x2="400" y1="110" y2="220" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6A7FAD"/><stop offset="1" stop-color="#263147"/>
+        </linearGradient>
+        <linearGradient id="cloudFrontLarge" x1="665" x2="665" y1="200" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#8DA3D1"/><stop offset="1" stop-color="#4B618E"/>
+        </linearGradient>
+        <linearGradient id="rainDropLarge" x1="0" x2="0" y1="0" y2="1">
+            <stop stop-color="#FFFFFF" stop-opacity="0.7"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+        </linearGradient>
+        <clipPath id="clip"><rect width="800" height="286" rx="20"/></clipPath>
+    </defs>
+</svg>

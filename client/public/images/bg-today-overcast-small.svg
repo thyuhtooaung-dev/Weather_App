@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="343" height="286" fill="none" viewBox="0 0 343 286">
+    <g clip-path="url(#b)">
+        <rect width="343" height="286" fill="url(#bgGrad)" rx="20"/>
+
+        <path fill="url(#cloudBack)" d="M30 200c0-35 30-65 65-65 8 0 15 1 22 4 15-30 45-50 80-50 45 0 82 32 92 73 8-2 15-4 22-4 38 0 68 30 68 68s-30 68-68 68H95c-38 0-65-30-65-65z" opacity="0.5"/>
+
+        <path fill="url(#cloudFront)" d="M-20 230c0-30 25-55 55-55 6 0 12 1 18 4 12-25 38-42 68-42 38 0 70 27 78 62 6-2 12-3 18-3 32 0 58 26 58 58s-26 58-58 58H35c-32 0-55-25-55-55z" opacity="0.8"/>
+
+        <path fill="url(#cloudFront)" d="M180 240c0-22 18-40 40-40 4 0 9 1 13 3 9-18 28-30 50-30 28 0 51 20 57 46 4-2 9-3 13-3 22 0 40 18 40 40s-18 40-40 40H220c-22 0-40-18-40-40z" opacity="0.6"/>
+    </g>
+
+    <defs>
+        <linearGradient id="bgGrad" x1="171.5" x2="171.5" y1="0" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#3D4650"/>
+            <stop offset="1" stop-color="#24292E"/>
+        </linearGradient>
+
+        <linearGradient id="cloudBack" x1="171.5" x2="171.5" y1="89" y2="268" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4B5563"/>
+            <stop offset="1" stop-color="#1F2937"/>
+        </linearGradient>
+
+        <linearGradient id="cloudFront" x1="100" x2="100" y1="137" y2="292" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#9CA3AF"/>
+            <stop offset="1" stop-color="#4B5563"/>
+        </linearGradient>
+
+        <clipPath id="b">
+            <rect width="343" height="286" fill="#fff" rx="20"/>
+        </clipPath>
+    </defs>
+</svg>

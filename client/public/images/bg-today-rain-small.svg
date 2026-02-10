@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="343" height="286" fill="none" viewBox="0 0 343 286">
+    <g clip-path="url(#clip)">
+        <rect width="343" height="286" fill="url(#rainSky)" rx="20"/>
+
+        <path fill="url(#cloudMid)" d="M-20 120c40-15 90 15 150 0s80-15 120 0 60 15 100 0v100H-20V120z" opacity="0.4"/>
+
+        <g stroke="url(#rainDrop)" stroke-width="1.5" stroke-linecap="round" opacity="0.6">
+            <line x1="60" y1="30" x2="52" y2="55"/><line x1="160" y1="20" x2="152" y2="45"/>
+            <line x1="260" y1="40" x2="252" y2="65"/><line x1="110" y1="90" x2="102" y2="115"/>
+            <line x1="210" y1="80" x2="202" y2="105"/><line x1="310" y1="100" x2="302" y2="125"/>
+            <line x1="40" y1="160" x2="32" y2="185"/><line x1="140" y1="150" x2="132" y2="175"/>
+            <line x1="240" y1="170" x2="232" y2="195"/><line x1="90" y1="220" x2="82" y2="245"/>
+            <line x1="190" y1="210" x2="182" y2="235"/><line x1="290" y1="230" x2="282" y2="255"/>
+        </g>
+
+        <path fill="url(#cloudFront)" d="M80 286c0-30 25-55 55-55 8 0 18 3 25 8 12-20 38-35 68-35 32 0 60 18 68 48 5-2 10-3 14-3 25 0 45 20 45 45v10H80v-18z" opacity="0.85"/>
+    </g>
+    <defs>
+        <linearGradient id="rainSky" x1="171.5" x2="171.5" y1="0" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4B618E"/><stop offset="1" stop-color="#263147"/>
+        </linearGradient>
+        <linearGradient id="cloudMid" x1="171.5" x2="171.5" y1="110" y2="220" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6A7FAD"/><stop offset="1" stop-color="#263147"/>
+        </linearGradient>
+        <linearGradient id="cloudFront" x1="211" x2="211" y1="200" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#8DA3D1"/><stop offset="1" stop-color="#4B618E"/>
+        </linearGradient>
+        <linearGradient id="rainDrop" x1="0" x2="0" y1="0" y2="1">
+            <stop stop-color="#FFFFFF" stop-opacity="0.7"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+        </linearGradient>
+        <clipPath id="clip"><rect width="343" height="286" rx="20"/></clipPath>
+    </defs>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="343" height="286" fill="none" viewBox="0 0 343 286">
+    <g clip-path="url(#clip)">
+        <rect width="343" height="286" fill="url(#snowSky)" rx="20"/>
+
+        <circle cx="171.5" cy="-10" r="180" fill="url(#winterGlow)" opacity="0.4"/>
+
+        <g fill="#fff" opacity="0.3">
+            <circle cx="40" cy="50" r="1.5"/><circle cx="120" cy="30" r="1"/>
+            <circle cx="200" cy="60" r="1.2"/><circle cx="280" cy="40" r="1"/>
+            <circle cx="70" cy="110" r="1"/><circle cx="160" cy="90" r="1.5"/>
+            <circle cx="240" cy="120" r="1"/><circle cx="310" cy="80" r="1.2"/>
+        </g>
+
+        <g fill="#fff" opacity="0.7">
+            <circle cx="30" cy="180" r="2.5"/><circle cx="100" cy="150" r="2"/>
+            <circle cx="180" cy="190" r="2.2"/><circle cx="260" cy="160" r="2.5"/>
+            <circle cx="60" cy="240" r="2"/><circle cx="140" cy="220" r="2.5"/>
+            <circle cx="220" cy="250" r="2"/><circle cx="300" cy="210" r="2.2"/>
+        </g>
+
+        <path fill="url(#snowDrift)" d="M-20 286c0-30 40-50 80-50s70 20 110 20 80-30 120-30 60 20 80 40v20H-20v-0z" opacity="0.9"/>
+    </g>
+
+    <defs>
+        <linearGradient id="snowSky" x1="171.5" x2="171.5" y1="0" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#2E335A"/>
+            <stop offset="1" stop-color="#1C1B33"/>
+        </linearGradient>
+
+        <radialGradient id="winterGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(171.5 -10) rotate(90) scale(180)">
+            <stop stop-color="#C2C9FF" stop-opacity="0.5"/>
+            <stop offset="1" stop-color="#2E335A" stop-opacity="0"/>
+        </radialGradient>
+
+        <linearGradient id="snowDrift" x1="171.5" x2="171.5" y1="226" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFFFFF"/>
+            <stop offset="1" stop-color="#A5B1FF"/>
+        </linearGradient>
+
+        <clipPath id="clip">
+            <rect width="343" height="286" rx="20"/>
+        </clipPath>
+    </defs>
+</svg>

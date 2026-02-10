@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="286" fill="none" viewBox="0 0 800 286">
+    <g clip-path="url(#clip)">
+        <rect width="800" height="286" fill="url(#fogBg)" rx="20"/>
+        <circle cx="400" cy="80" r="120" fill="url(#fadedGlow)" opacity="0.3"/>
+        <path fill="url(#mistGrad1)" d="M-50 150c150-15 350 15 550 0s250 15 350 0v136H-50V150z" opacity="0.4"/>
+        <path fill="url(#mistGrad2)" d="M-20 190c200 10 400-10 600 0s200-10 250 0v96H-20V190z" opacity="0.6"/>
+        <path fill="url(#mistGrad3)" d="M0 230c150-5 350 5 550 0s200 5 250 0v56H0V230z" opacity="0.8"/>
+    </g>
+    <defs>
+        <linearGradient id="fogBg" x1="400" x2="400" y1="0" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#94A3B8"/><stop offset="1" stop-color="#475569"/>
+        </linearGradient>
+        <radialGradient id="fadedGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(400 80) rotate(90) scale(120)">
+            <stop stop-color="#E2E8F0" stop-opacity="0.5"/><stop offset="1" stop-color="#94A3B8" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="mistGrad1" x1="400" x2="400" y1="150" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#CBD5E1"/><stop offset="1" stop-color="#64748B"/>
+        </linearGradient>
+        <linearGradient id="mistGrad2" x1="400" x2="400" y1="190" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#F1F5F9"/><stop offset="1" stop-color="#94A3B8"/>
+        </linearGradient>
+        <linearGradient id="mistGrad3" x1="400" x2="400" y1="230" y2="286" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#E2E8F0"/>
+        </linearGradient>
+        <clipPath id="clip"><rect width="800" height="286" rx="20"/></clipPath>
+    </defs>
+</svg>
