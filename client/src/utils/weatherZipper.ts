@@ -1,21 +1,6 @@
-interface DailyWeather {
-  daily: {
-    time: string[];
-    temperature_2m_max: number[];
-    temperature_2m_min: number[];
-    weather_code: number[];
-  };
-}
+import type { WeatherData } from "@/types/weather.ts";
 
-interface HourlyWeather {
-  hourly: {
-    time: string[];
-    temperature_2m: number[];
-    weather_code: number[];
-  };
-}
-
-export const dailyForecasts = (weather: DailyWeather) =>
+export const dailyForecasts = (weather: WeatherData) =>
   weather.daily.time.map((time, index) => {
     return {
       time: time,
@@ -25,11 +10,13 @@ export const dailyForecasts = (weather: DailyWeather) =>
     };
   });
 
-export const allHours = (weather: HourlyWeather) =>
-  weather.hourly.time.map((time, index) => {
+export const allHours = (data: WeatherData) => {
+  return data.hourly.time.map((time, index) => {
     return {
       time: time,
-      temp: weather.hourly.temperature_2m[index],
-      code: weather.hourly.weather_code[index],
+      temp: data.hourly.temperature_2m[index],
+      code: data.hourly.weather_code[index],
+      isDay: data.hourly.is_day ? data.hourly.is_day[index] : 1,
     };
   });
+};

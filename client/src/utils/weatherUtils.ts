@@ -11,10 +11,12 @@ export type WeatherFileKey =
   | "thunderstorm"
   | "unknown";
 
-export const getWeatherFileKey = (code: number): WeatherFileKey => {
+export const getWeatherFileKey = (
+  code: number
+): WeatherFileKey => {
   switch (code) {
     case 0:
-      return "clearSky";
+      return  "clearSky";
     case 1:
     case 2:
       return "partlyCloudy";
@@ -71,13 +73,19 @@ export const getBackgroundImages = (code: number, isNight: boolean) => {
   };
 };
 
-export const getWeatherConfig = (code: number) => {
+export const getWeatherConfig = (code: number, isNight: boolean = false) => {
   switch (code) {
     case 0:
-      return { label: "Clear Sky", icon: "icon-sunny" };
+      return {
+        label: "Clear Sky",
+        icon: isNight ? "icon-moon" : "icon-sunny"
+      };
     case 1:
     case 2:
-      return { label: "Partly Cloudy", icon: "icon-partly-cloudy" };
+      return {
+        label: "Partly Cloudy",
+        icon: isNight ? "icon-partlyCloud-moon" : "icon-partly-cloudy"
+      };
     case 3:
       return { label: "Overcast", icon: "icon-overcast" };
     case 45:

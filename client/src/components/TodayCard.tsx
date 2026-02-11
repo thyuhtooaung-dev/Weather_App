@@ -19,13 +19,13 @@ export default function TodayCard({
   lat: number;
   lon: number;
 }) {
-  const currentConfig = getWeatherConfig(weather.current.weather_code);
+  const isNight = weather.current.is_day === 0;
+  const currentConfig = getWeatherConfig(weather.current.weather_code, isNight);
   const { formatTemp, formatTodayTime } = useFormatWeather();
   const { user } = useAuth();
   const navigate = useNavigate();
   const { isFavorite, addFavorite, removeFavorite, favorites } = useFavorites();
   const isLiked = isFavorite(lat, lon);
-  const isNight = weather.current.is_day === 0
   const bgImages = getBackgroundImages(weather.current.weather_code, isNight);
 
   const handleHeartClick = async (likedState: boolean) => {

@@ -126,7 +126,9 @@ export class AuthService {
       );
     }
 
-    let user = await this.userRepo.findOne({ where: { email: normalizedEmail } });
+    let user = await this.userRepo.findOne({
+      where: { email: normalizedEmail },
+    });
 
     if (!user) {
       user = this.userRepo.create({

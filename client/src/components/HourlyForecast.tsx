@@ -28,7 +28,7 @@ export default function HourlyForecast({ weather }: { weather: WeatherData }) {
   });
 
   return (
-    <div className="bg-[#ececec] dark:bg-neutral-800 p-4 rounded-xl h-full flex flex-col max-h-200 transition-colors">
+    <div className="bg-[#ececec] dark:bg-neutral-800 p-4 rounded-xl h-full flex flex-col max-h-197 transition-colors">
       <header className="flex items-center justify-between mb-4 shrink-0">
         <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-0">
           Hourly forecast
@@ -78,28 +78,32 @@ export default function HourlyForecast({ weather }: { weather: WeatherData }) {
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 pb-4 overflow-y-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
-        {currentDayHours.map((hour) => (
-          <div
-            key={hour.time}
-            className="min-w-20 flex justify-between items-center bg-neutral-0 dark:bg-neutral-700 p-3 rounded-md transition-colors"
-          >
-            <div className="flex gap-4 items-center">
-              <img
-                src={`/images/${getWeatherConfig(hour.code).icon}.webp`}
-                alt={getWeatherConfig(hour.code).label}
-                className="size-10"
-              />
+        {currentDayHours.map((hour) => {
+          const isNight = hour.isDay === 0;
+          const config = getWeatherConfig(hour.code, isNight);
+          return (
+            <div
+              key={hour.time}
+              className="min-w-20 flex justify-between items-center bg-neutral-0 dark:bg-neutral-700 p-3 rounded-md transition-colors"
+            >
+              <div className="flex gap-4 items-center">
+                <img
+                  src={`/images/${config.icon}.webp`}
+                  alt={config.label}
+                  className="size-10"
+                />
 
-              <span className="text-lg text-neutral-900 dark:text-neutral-0 font-semibold">
-                {formatTime(hour.time)}
+                <span className="text-lg text-neutral-900 dark:text-neutral-0 font-semibold">
+                  {formatTime(hour.time)}
+                </span>
+              </div>
+
+              <span className="font-bold text-neutral-900 dark:text-neutral-200">
+                {formatTemp(hour.temp)}
               </span>
             </div>
-
-            <span className="font-bold text-neutral-900 dark:text-neutral-200">
-              {formatTemp(hour.temp)}
-            </span>
-          </div>
-        ))}
+          );
+        })}
         {currentDayHours.length < 8 && (
           <div className="md:col-span-2 lg:col-span-1 py-10 flex flex-col items-center justify-center opacity-40">
             <span className="w-16 h-px bg-neutral-400 mb-2"></span>

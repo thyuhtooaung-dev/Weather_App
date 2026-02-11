@@ -1,26 +1,15 @@
 import { ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-
-function parseCookieHeader(cookieHeader?: string): Record<string, string> {
-  if (!cookieHeader) {
-    return {};
-  }
-
-  return cookieHeader.split(';').reduce<Record<string, string>>((acc, item) => {
-    const [key, ...value] = item.trim().split('=');
-    acc[key] = decodeURIComponent(value.join('='));
-    return acc;
-  }, {});
-}
+import { Request } from 'express';
 
 @Injectable()
 export class GoogleOauthGuard extends AuthGuard('google') {
   getAuthenticateOptions(context: ExecutionContext) {
-    const request = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest<Request>();
 
     return {
       session: false,
-      state: request.query.state,
+      state: request.query.state as string | undefined,
     };
   }
 }
@@ -28,11 +17,11 @@ export class GoogleOauthGuard extends AuthGuard('google') {
 @Injectable()
 export class GithubOauthGuard extends AuthGuard('github') {
   getAuthenticateOptions(context: ExecutionContext) {
-    const request = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest<Request>();
 
     return {
       session: false,
-      state: request.query.state,
+      state: request.query.state as string | undefined,
     };
   }
 }

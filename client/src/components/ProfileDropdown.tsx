@@ -36,7 +36,6 @@ export default function ProfileDropdown({setShowFavorites}: {setShowFavorites: (
       .toUpperCase()
       .slice(0, 2);
 
-  // Common classes for menu items to avoid repetition
   const menuItemClasses = "cursor-pointer focus:bg-neutral-200 dark:focus:bg-neutral-700 focus:text-neutral-900 dark:focus:text-neutral-200";
 
   return (

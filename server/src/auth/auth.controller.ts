@@ -26,14 +26,14 @@ export class AuthController {
     private readonly jwtService: JwtService,
   ) {}
 
-  private getCookieSecurityOptions() {
+  private getCookieSecurityOptions(): { secure: boolean; sameSite: 'lax' | 'none' | 'strict' } {
     const clientUrl =
       this.configService.get<string>('CLIENT_URL') || 'http://localhost:5173';
     const isLocal = clientUrl.includes('localhost');
 
     return {
       secure: !isLocal,
-      sameSite: (isLocal ? 'lax' : 'none') as 'lax' | 'none',
+      sameSite: isLocal ? 'lax' : 'none',
     };
   }
 

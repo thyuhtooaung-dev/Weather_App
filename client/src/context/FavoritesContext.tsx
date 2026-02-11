@@ -15,29 +15,30 @@ const FavoritesContext = createContext<FavoritesContextType | undefined>(
 
 export function FavoritesProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
-  const [favorites, setFavorites] = useState<FavoriteCity[]>([]);
+  const [internalFavorites, setInternalFavorites] = useState<FavoriteCity[]>([]);
+  const favorites = user ? internalFavorites : [];
 
   useEffect(() => {
     if (user) {
-      favoritesApi.getAll().then(setFavorites).catch(console.error);
-    } else {
-      setFavorites([]);
+      favoritesApi.getAll().then(setInternalFavorites).catch(console.error);
     }
   }, [user]);
 
   const addFavorite = async (city: Omit<FavoriteCity, "id">) => {
+    if (!user) return;
     try {
       const newFav = await favoritesApi.add(city);
-      setFavorites((prev) => [...prev, newFav]);
+      setInternalFavorites((prev) => [...prev, newFav]);
     } catch (error) {
       console.error("Failed to add favorite", error);
     }
   };
 
   const removeFavorite = async (id: string) => {
+    if (!user) return;
     try {
       await favoritesApi.remove(id);
-      setFavorites((prev) => prev.filter((fav) => fav.id !== id));
+      setInternalFavorites((prev) => prev.filter((fav) => fav.id !== id));
     } catch (error) {
       console.error("Failed to remove favorite", error);
     }

@@ -35,11 +35,13 @@ export interface WeatherData {
     time: string;
     temperature_2m: string;
     weather_code: string;
+    is_day: string
   };
   hourly: {
     time: string[];
     temperature_2m: number[];
     weather_code: number[];
+    is_day: number[]
   };
   daily_units: {
     time: string;

@@ -9,7 +9,7 @@ export const getWeather = async (
     params: {
       latitude: lat,
       longitude: lon,
-      hourly: "temperature_2m,weather_code",
+      hourly: "temperature_2m,weather_code,is_day",
       daily:
         "temperature_2m_max,temperature_2m_min,weather_code,uv_index_max,sunrise,sunset",
       current:

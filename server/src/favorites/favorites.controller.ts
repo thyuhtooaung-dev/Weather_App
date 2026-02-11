@@ -12,6 +12,13 @@ import { AuthGuard } from '@nestjs/passport';
 import { FavoritesService } from './favorites.service';
 import * as types from '../auth/types';
 
+class AddFavoriteDto {
+  name: string;
+  country: string;
+  lat: number;
+  lon: number;
+}
+
 @Controller('favorites')
 @UseGuards(AuthGuard('jwt'))
 export class FavoritesController {
@@ -23,7 +30,7 @@ export class FavoritesController {
   }
 
   @Post()
-  create(@Req() req: types.AuthenticatedRequest, @Body() body: any) {
+  create(@Req() req: types.AuthenticatedRequest, @Body() body: AddFavoriteDto) {
     return this.favService.create(req.user.userId, body);
   }
 
