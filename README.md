@@ -55,7 +55,7 @@ Extra Features
 
 - [React](https://react.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [TanStack Query (React Query)](https://tanstack.com/query/latest)
+- [TanStack Query](https://tanstack.com/query/latest)
 - [shadcn/ui](https://ui.shadcn.com/)
 - [NestJS](https://nestjs.com/)
 - [TypeORM](https://typeorm.io/)
