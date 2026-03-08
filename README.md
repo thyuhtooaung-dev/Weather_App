@@ -1,7 +1,3 @@
-# Weather app solution
-
-This is a solution to the [Weather app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/weather-app-K1FhddVm49).
-
 ## Table of contents
 
 - [Overview](#overview)
