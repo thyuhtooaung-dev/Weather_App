@@ -1,64 +1,61 @@
-## Table of contents
+# Weather App
 
-- [Overview](#overview)
-    - [The challenge](#the-challenge)
-    - [Screenshot](#screenshot)
-    - [Links](#links)
-- [My process](#my-process)
+## Table of Contents
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Links](#links)
+- [My Process](#my-process)
     - [Built with](#built-with)
 - [Author](#author)
 
-## Overview
+## Features
 
-### The challenge
+### Weather Data & Visualization
+* **Dynamic Search:** Search for real-time weather information by any global location.
+* **Current Conditions:** Detailed overview including temperature, weather icons, and location metadata.
+* **Comprehensive Metrics:** Track "Feels Like" temperatures, humidity, wind speed, and precipitation.
+* **Detailed Forecasts:** * **7-Day Outlook:** High/low temperature trends with daily condition icons.
+    * **Hourly Breakdown:** Granular temperature changes throughout the day.
+    * **Day Selector:** Interactive toggle to switch hourly views between different days of the week.
+* **Advanced Data:** Access to UV Index, visibility, and air pressure (powered by Open-Meteo).
+* **Solar Tracking:** Visual indicators for sunrise and sunset times.
 
-Users should be able to:
+### Unit & Preference Control
+* **Global Unit Toggles:** Seamlessly switch between **Imperial** and **Metric** systems.
+* **Granular Customization:** Individual toggles for specific units ($^\circ\text{C}$ vs $^\circ\text{F}$, km/h vs mph, and millimeters for rainfall).
+* **Smart Themes:** Dark and Light modes that automatically adapt based on the user's local time.
+* **Dynamic Backgrounds:** Animated UI backgrounds that change to reflect current weather conditions.
 
-- Search for weather information by entering a location in the search bar
-- View current weather conditions including temperature, weather icon, and location details
-- See additional weather metrics like "feels like" temperature, humidity percentage, wind speed, and precipitation amounts
-- Browse a 7-day weather forecast with daily high/low temperatures and weather icons
-- View an hourly forecast showing temperature changes throughout the day
-- Switch between different days of the week using the day selector in the hourly forecast section
-- Toggle between Imperial and Metric measurement units via the units dropdown
-- Switch between specific temperature units (Celsius and Fahrenheit) and measurement units for wind speed (km/h and mph) and precipitation (millimeters) via the units dropdown
-- View the optimal layout for the interface depending on their device's screen size
-- See hover and focus states for all interactive elements on the page
+### User Experience & Accessibility
+* **Geolocation:** Automatic weather detection for the user's current location on initial load.
+* **Saved Locations:** A favorites system to bookmark and quickly access frequently checked cities.
+* **Responsive Design:** Fully optimized layout for mobile, tablet, and desktop screens.
+* **Interactive UI:** High-visibility hover and focus states for all interactive elements.
+* **PWA Ready:** Progressive Web App capabilities for installation on mobile devices.
 
-Extra Features
-- Add geolocation detection to automatically show weather for the user's current location on first visit
-- Implement a favorites/saved locations system where users can bookmark frequently checked locations
-- Include UV index, visibility, and air pressure data (available via Open-Meteo)
-- Add sunrise/sunset times with visual indicators
-- Add animated weather backgrounds that change based on current conditions
-- Create dark/light mode themes that adapt to the time of day
-- Add progressive web app (PWA) capabilities for mobile installation
+## Screenshots
 
-### Screenshots
+| Desktop View | Mobile View |
+| :--- | :--- |
+| ![Desktop Screenshot](./screenshots/desktop.png) | ![Mobile Screenshot](./screenshots/mobile.png) |
 
-| Desktop View                                      | Mobile View                                    |
-|---------------------------------------------------|------------------------------------------------|
-| ![Desktop Screenshot](./screenshots/desktop.png)  | ![Mobile Screenshot](./screenshots/mobile.png) |
-
-### Links
+## Links
 
 - Solution URL: [GitHub](https://github.com/thyuhtooaung-dev/Weather_App)
 - Live Site URL: [Vercel](https://weather-app-pi-eosin-28.vercel.app/)
 
-## My process
+## My Process
 
 ### Built with
-
-- [React](https://react.dev/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [TanStack Query](https://tanstack.com/query/latest)
-- [shadcn/ui](https://ui.shadcn.com/)
-- [NestJS](https://nestjs.com/)
-- [TypeORM](https://typeorm.io/)
-- [Neon](https://neon.tech/)
+* [React](https://react.dev/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [TanStack Query](https://tanstack.com/query/latest)
+* [shadcn/ui](https://ui.shadcn.com/)
+* [NestJS](https://nestjs.com/)
+* [TypeORM](https://typeorm.io/)
+* [Neon](https://neon.tech/)
 
 ## Author
-
-- Github - [Thyu Htoo Aung](https://github.com/thyuhtooaung-dev)
-- Frontend Mentor - [@PoungMont](https://www.frontendmentor.io/profile/thyuhtooaung-dev)
-- X - [@PoungMont](https://x.com/Poung_Mont)
+* Github - [Thyu Htoo Aung](https://github.com/thyuhtooaung-dev)
+* Frontend Mentor - [@PoungMont](https://www.frontendmentor.io/profile/thyuhtooaung-dev)
+* X - [@PoungMont](https://x.com/Poung_Mont)
